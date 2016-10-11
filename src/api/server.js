@@ -12,7 +12,6 @@ const server = restify.createServer();
 server.get('/api/hello/:name', respond);
 server.head('/api/hello/:name', respond);
 
-
 const staticPath = __dirname + '/../../';
 server.get(/\/static\/?.*/, restify.serveStatic({
   directory: staticPath
@@ -24,7 +23,7 @@ server.get(/.*/, restify.serveStatic({
   file: 'index.html'
 }))
 
-const port = 8080;
+const port = 3000; // TODO: A config!
 server.listen(port, () => {
   console.log(server.name + ' listening on ' + port);
 });

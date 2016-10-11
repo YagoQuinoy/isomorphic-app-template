@@ -33,11 +33,13 @@ const serverConfig = {
 const browserConfig = {
   entry: {
     app: path.resolve(__dirname, './src/app.js'),
-    // vendor: ['jquery']
+    vendor: ['jquery'],
+    dev: ['webpack-dev-server/client?http://localhost:3001']
   },
   output: {
     path: path.resolve(__dirname, './static/'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
+    publicPath: 'http://localhost:3001/static/'
   },
   module: {
     loaders: [{
@@ -46,12 +48,18 @@ const browserConfig = {
       loader: 'babel-loader'
     }]
   },
-  // plugins: [
-  //   new webpack.optimize.CommonsChunkPlugin({
-  //     name: 'vendor',
-  //     filename: 'vendor.js'
-  //   })
-  // ]
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      chunks: ['vendor'],
+      filename: 'vendor.js'
+    })
+  ]
 };
+
+// config.entry.dev = [
+//   'webpack-dev-server/client?http://localhost:3001',
+//   'webpack/hot/only-dev-server',
+// ];
 
 module.exports = [browserConfig, serverConfig];
