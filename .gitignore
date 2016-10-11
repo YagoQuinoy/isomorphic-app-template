@@ -1,3 +1,7 @@
+# App
+dist
+static/app.bundle.js
+
 # Logs
 logs
 *.log
