@@ -1,5 +1,6 @@
 import path from 'path';
 import restify from 'restify';
+// import webpackMiddleware from 'webpack-dev-middleware' // NOTE: Intentalo https://github.com/webpack/webpack-dev-middleware
 
 function respond(req, res, next) {
   res.send('hello ' + req.params.name);
