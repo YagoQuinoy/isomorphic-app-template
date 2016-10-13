@@ -20,8 +20,8 @@ new WebpackDevServer(webpack(browserConfig), {
     timings: true,
     chunks: false
   }
-}).listen(port, 'localhost', function (err) {
-  if (err) {
+}).listen(port, 'localhost', function(err) {
+  if(err) {
     console.log(err);
   }
 

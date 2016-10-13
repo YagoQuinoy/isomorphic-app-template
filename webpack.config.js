@@ -33,13 +33,11 @@ const serverConfig = {
 const browserConfig = {
   entry: {
     app: path.resolve(__dirname, './src/app.js'),
-    vendor: ['jquery'],
-    dev: ['webpack-dev-server/client?http://localhost:3001']
+    vendor: ['jquery']
   },
   output: {
     path: path.resolve(__dirname, './static/'),
-    filename: '[name].bundle.js',
-    publicPath: 'http://localhost:3001/static/'
+    filename: '[name].bundle.js'
   },
   module: {
     loaders: [{
@@ -57,9 +55,9 @@ const browserConfig = {
   ]
 };
 
-// config.entry.dev = [
-//   'webpack-dev-server/client?http://localhost:3001',
-//   'webpack/hot/only-dev-server',
-// ];
+if(process.env.NODE_ENV === 'development') {
+  browserConfig.entry.dev = ['webpack-dev-server/client?http://localhost:3001'];
+  browserConfig.output.publicPath = 'http://localhost:3001/static/';
+}
 
 module.exports = [browserConfig, serverConfig];

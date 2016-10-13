@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Isomorphic app template</title>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="<%= favicon %>" />
+    </head>
+    <body>
+      <div id="app">Wait for it!</div>
+        <% scripts.forEach(function(script) { %>
+            <script src="<%= script %>"></script>
+        <% }) %>
+    </body>
+</html>
