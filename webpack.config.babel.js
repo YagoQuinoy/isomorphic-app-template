@@ -1,6 +1,9 @@
 // Libs
-var path = require('path');
-var webpack = require('webpack');
+import path from 'path';
+import webpack from 'webpack';
+
+// NOTE: Environment: production if npm run build, development npm run start:dev (required in webpack.server.js)
+import config from './config';
 
 /**
  * Thanks Ambroos!
@@ -17,7 +20,7 @@ const serverConfig = {
     filename: '[name].bundle.js',
     libraryTarget: 'commonjs'
   },
-  externals: [/^(?!\.|\/).+/i, ],
+  externals: [/^(?!\.|\/).+/i],
   module: {
     loaders: [{
       test: /\.js$/,
@@ -56,8 +59,9 @@ const browserConfig = {
 };
 
 if(process.env.NODE_ENV === 'development') {
-  browserConfig.entry.dev = ['webpack-dev-server/client?http://localhost:3001'];
-  browserConfig.output.publicPath = 'http://localhost:3001/static/';
+  const baseUrl = config.baseUrl + ':' + config.webpackDevServerPort;
+  browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`];
+  browserConfig.output.publicPath = `${baseUrl}/static/`;
 }
 
 module.exports = [browserConfig, serverConfig];

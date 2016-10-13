@@ -1,14 +1,14 @@
 // Libs
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
+import webpack from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
+
+// App config
+import config from './config';
 
 // Webpack config
-var webpackConfig = require('./webpack.config');
+import webpackConfig from './webpack.config';
 
-// Constant
-var port = 3001;
-
-var browserConfig = webpackConfig[0];
+const browserConfig = webpackConfig[0];
 new WebpackDevServer(webpack(browserConfig), {
   publicPath: browserConfig.output.publicPath,
   // hot: true,
@@ -20,9 +20,10 @@ new WebpackDevServer(webpack(browserConfig), {
     timings: true,
     chunks: false
   }
-}).listen(port, 'localhost', function(err) {
+}).listen(config.webpackDevServerPort, 'localhost', function(err) {
   if(err) {
     console.log(err);
+    return;
   }
 
   console.log('Webpack dev server is listening at localhost:' + port);
