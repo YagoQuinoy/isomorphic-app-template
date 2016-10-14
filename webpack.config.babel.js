@@ -64,4 +64,4 @@ if(process.env.NODE_ENV === 'development') {
   browserConfig.output.publicPath = `${baseUrl}/static/`;
 }
 
-module.exports = [browserConfig, serverConfig];
+export default [browserConfig, serverConfig];

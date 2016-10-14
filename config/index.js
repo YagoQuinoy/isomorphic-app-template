@@ -11,4 +11,4 @@ const config = {
 // NOTE: Webpack don't like 'process.env' inside a 'require()', outputing 'ReferenceError'
 const env = process.env.NODE_ENV || 'production';
 
-export default _.merge({}, config, require('./environment/' + env + '.js').default || {});
+export default _.merge({}, config, require('./' + env + '.js').default || {});

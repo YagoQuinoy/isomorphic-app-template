@@ -6,7 +6,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import config from './config';
 
 // Webpack config
-import webpackConfig from './webpack.config';
+import webpackConfig from './webpack.config.babel';
 
 const browserConfig = webpackConfig[0];
 new WebpackDevServer(webpack(browserConfig), {
@@ -26,5 +26,5 @@ new WebpackDevServer(webpack(browserConfig), {
     return;
   }
 
-  console.log('Webpack dev server is listening at localhost:' + port);
+  console.log('Webpack dev server is listening at localhost:' + config.port);
 });

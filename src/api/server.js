@@ -2,30 +2,16 @@
 import path from 'path';
 import restify from 'restify';
 
-import { render } from './serverRendering';
+import config from '../../config';
 
-function respond(req, res, next) {
-  res.send('hello ' + req.params.name);
-}
+import * as errorHandler from './errorHandler';
+import * as router from './router';
 
 const server = restify.createServer();
 
-// Routing
-server.get('/api/hello/:name', respond);
-server.head('/api/hello/:name', respond);
+errorHandler.init(server);
+router.init(server);
 
-const staticPath = __dirname + '/../../';
-server.get(/\/static\/?.*|\/favicon.ico/, restify.serveStatic({
-  directory: staticPath
-}));
-
-server.get(/.*/, (req, res, next) => {
-  render((err, html) => {
-    res.end(html);
-  });
-});
-
-const port = 3000; // TODO: A config!
-server.listen(port, () => {
-  console.log(server.name + ' listening on ' + port);
+server.listen(config.port, () => {
+  console.log(server.name + ' listening on ' + config.port);
 });

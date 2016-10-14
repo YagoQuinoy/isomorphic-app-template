@@ -1,8 +1,10 @@
 import $ from 'jquery';
 
 $(window.document).ready(() => {
-  $.get('http://localhost:3000/api/hello/buddy')
+  window.setTimeout(() => {
+    $.get('http://localhost:3000/api/hello/buddy')
     .done((data) => {
-      $(`<h1>${data} - changos, monos y gorilas!</h1>`).appendTo('div#app');
+      $(`<h1>${data}! Changos, monos y gorilas!</h1>`).appendTo('div#app');
     });
+  }, 2000);
 });

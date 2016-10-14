@@ -11,6 +11,10 @@ if(process.env.NODE_ENV === 'development') {
   scripts.push(`http://localhost:${port}/static/dev.bundle.js`);
 }
 
+/**
+ * Render first response as HTML.
+ * @param  {Function} cb
+ */
 export function render(cb) {
   ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
     favicon: favicon,
@@ -18,5 +22,4 @@ export function render(cb) {
   }, function(err, str) {
     typeof cb === 'function' && cb(null, str);
   });
-
-}
+};
