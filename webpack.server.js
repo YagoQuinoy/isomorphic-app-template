@@ -1,12 +1,18 @@
 // Libs
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
+import bunyan from 'bunyan';
 
 // App config
 import config from './config';
 
 // Webpack config
 import webpackConfig from './webpack.config.babel';
+
+const logger = bunyan.createLogger({
+  name: 'webpackDevServer',
+  stream: process.stdout
+});
 
 const browserConfig = webpackConfig[0];
 new WebpackDevServer(webpack(browserConfig), {
@@ -22,9 +28,9 @@ new WebpackDevServer(webpack(browserConfig), {
   }
 }).listen(config.webpackDevServerPort, 'localhost', function(err) {
   if(err) {
-    console.log(err);
+    logger.error(err);
     return;
   }
 
-  console.log('Webpack dev server is listening at localhost:' + config.port);
+  logger.info(`Webpack dev server is listening at localhost: ${config.port}`);
 });

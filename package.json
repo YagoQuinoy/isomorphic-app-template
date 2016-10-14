@@ -13,6 +13,7 @@
   "author": "Yago Quiñoy Lobariñas",
   "license": "ISC",
   "dependencies": {
+    "bunyan": "^1.8.1",
     "ejs": "^2.5.2",
     "jquery": "^3.1.1",
     "lodash": "^4.16.4",
