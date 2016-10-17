@@ -20,7 +20,7 @@ errorHandler.init(server);
 // Logging
 server.use(restify.requestLogger());
 
-if(config.env !== 'production') {
+if(config.env !== 'production' && config.logger.audit) {
   server.on('after', restify.auditLogger({
     log: bunyan.createLogger({
       name: 'audit',

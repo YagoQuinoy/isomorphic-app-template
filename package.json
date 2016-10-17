@@ -17,7 +17,8 @@
     "ejs": "^2.5.2",
     "jquery": "^3.1.1",
     "lodash": "^4.16.4",
-    "restify": "^4.1.1"
+    "restify": "^4.1.1",
+    "schema-inspector": "^1.6.6"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
