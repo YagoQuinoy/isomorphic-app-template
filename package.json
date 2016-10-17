@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/api.bundle.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently --kill-others \"nodemon --watch src/api src/api/server.js --exec babel-node --presets es2015\" \"babel-node --presets es2015 webpack.server.js\"",
+    "start:dev": "cross-env NODE_ENV=development concurrently --kill-others \"nodemon --watch src/server src/server/index.js --exec babel-node --presets es2015\" \"babel-node --presets es2015 webpack.server.js\"",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build"
@@ -13,10 +13,16 @@
   "author": "Yago Quiñoy Lobariñas",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.1",
     "bunyan": "^1.8.1",
     "ejs": "^2.5.2",
     "jquery": "^3.1.1",
     "lodash": "^4.16.4",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
     "restify": "^4.1.1",
     "schema-inspector": "^1.6.6"
   },

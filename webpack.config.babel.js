@@ -12,7 +12,7 @@ import config from './config';
  */
 const serverConfig = {
   entry: {
-    api: path.resolve(__dirname, './src/api/server.js')
+    api: path.resolve(__dirname, './src/server/index.js')
   },
   target: 'node',
   output: {

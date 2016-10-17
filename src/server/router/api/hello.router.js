@@ -1,4 +1,4 @@
-import * as helloController from '../../controllers/hello';
+import * as helloController from '../../api/controllers/hello';
 
 /**
  * Hello controller router

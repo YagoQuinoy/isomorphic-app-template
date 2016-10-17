@@ -15,6 +15,7 @@ const logger = bunyan.createLogger({
 const server = restify.createServer({
   log: logger
 });
+
 errorHandler.init(server);
 
 // Logging
