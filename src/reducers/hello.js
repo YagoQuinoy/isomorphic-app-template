@@ -7,10 +7,10 @@ const defaultState = {};
  * @param  {Object} action
  * @return {Object}
  */
-function questionsReducer (state = defaultState, action) {
+function helloReducer (state = defaultState, action) {
   switch(action.type) {
     case 'LOADED_HELLO':
-      state = action.response;
+      state.hello = action.response.hello;
       return state;
 
     default:
@@ -18,4 +18,4 @@ function questionsReducer (state = defaultState, action) {
   }
 }
 
-export default questionsReducer;
+export default helloReducer;

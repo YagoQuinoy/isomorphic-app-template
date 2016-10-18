@@ -6,7 +6,10 @@
         <link rel="shortcut icon" href="<%= favicon %>" />
     </head>
     <body>
-      <div id="app">Wait for it!</div>
+        <div id="app"><%- html %></div>
+        <script type="text/javascript" charset="utf-8">
+          window.__REDUX_STATE__ = '<%= reduxState %>';
+        </script>
         <% scripts.forEach(function(script) { %>
             <script src="<%= script %>"></script>
         <% }) %>

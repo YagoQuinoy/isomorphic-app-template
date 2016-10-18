@@ -1,33 +1,47 @@
 // Redux
 import { createStore, applyMiddleware } from 'redux';
 
-// Redux middleware
-import apiMiddleware from 'middleware/api'
-
 // Config
-import config from 'config'
+import config from '../../config';
+
+// Api middleware
+import apiMiddleware from '../middleware/api';
 
 // Reducers
-import rootReducer from 'reducers'
+import rootReducer from '../reducers';
 
-const middlewares = [apiMiddleware]
+// Utils
+import { isBrowser } from '../utils';
 
-if(config.env === 'development') {
-  const loggerMiddleware = require('../middleware/logger').default
-  middlewares.push(loggerMiddleware)
+const middlewares = [apiMiddleware];
+
+if (config.env === 'development' && isBrowser()) {
+  const loggerMiddleware = require('../middleware/logger').default;
+  middlewares.push(loggerMiddleware);
 }
 
-const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
+const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
+let store;
+
+/**
+ * TODO: Refactor name.
+ * @param  {Object} [initialState={}]
+ * @return {Object}
+ */
 export default function configureStore(initialState = {}) {
-  const store = createStoreWithMiddleware(rootReducer, initialState)
+  if(store){
+    return store;
+  }
+
+  store = createStoreWithMiddleware(rootReducer, initialState);
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
-      const nextRootReducer = require('../reducers')
-      store.replaceReducer(nextRootReducer)
-    })
+      const nextRootReducer = require('../reducers');
+      store.replaceReducer(nextRootReducer);
+    });
   }
 
-  return store
+  return store;
 }

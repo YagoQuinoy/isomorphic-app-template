@@ -9,10 +9,10 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 // Store
-import configureStore from 'store/configureStore';
+import configureStore from './store/configureStore';
 
 // Router
-import createRoutes from 'routes';
+import createRoutes from './routes';
 
 let reduxState = {};
 if (window.__REDUX_STATE__) {

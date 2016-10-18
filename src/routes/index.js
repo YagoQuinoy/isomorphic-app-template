@@ -1,14 +1,16 @@
 // React
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+// Store
+import configureStore from '../store/configureStore';
 
 // Components
-import App from 'components/App';
-import Intro from 'components/Intro';
+import App from '../components/App';
 
 // Containers
-import Questions from 'containers/Questions';
-import Question from 'containers/Question';
+import Hello from '../containers/Hello';
 
 /**
  * Application router
@@ -16,12 +18,15 @@ import Question from 'containers/Question';
  * @return {Object}
  */
 export default function(history) {
+  const store = configureStore();
+  const syncHistory = syncHistoryWithStore(history, store);
+
+  // <Route path="hello/:name" component={ Hello } />
+  // <IndexRoute component={ Hello } />
+  // 
   return (
-    <Router history={history}>
-      <Route path="/" component={App}>
-        <Route path="questions" component={Questions} />
-        <Route path="questions/:id" component={Question} />
-        <IndexRoute component={Intro} />
+    <Router history={ syncHistory }>
+      <Route path="/" component={ App }>
       </Route>
     </Router>
   );

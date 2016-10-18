@@ -18,9 +18,7 @@ export function init(server) {
   }));
 
   // Server Side Rendering
-  server.get(/.*/, (req, res) => {
-    render((err, html) => {
-      res.end(html);
-    });
+  server.get(/.*/, (req, res, next) => {
+    render(req, res, next);
   });
 };

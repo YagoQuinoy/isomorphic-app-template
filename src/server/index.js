@@ -1,15 +1,18 @@
 // Libs
-import path from 'path';
 import restify from 'restify';
 import bunyan from 'bunyan';
+import bformat from 'bunyan-format';
 
 import config from '../../config';
 import * as errorHandler from './errorHandler';
 import * as router from './router';
 
+const formatOut = bformat({ outputMode: 'short' }, process.stdout);
+
 const logger = bunyan.createLogger({
   name: 'showtime',
-  level: (config.env === 'development') ? 'debug' : 'info'
+  level: (config.env === 'development') ? 'debug' : 'info',
+  stream: formatOut
 });
 
 const server = restify.createServer({
@@ -25,7 +28,7 @@ if(config.env !== 'production' && config.logger.audit) {
   server.on('after', restify.auditLogger({
     log: bunyan.createLogger({
       name: 'audit',
-      stream: process.stdout,
+      stream: formatOut,
       body: true
     })
   }));

@@ -1,12 +1,13 @@
 // React/Redux
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 // Reducers
-import questions from './questions'
-import questionDetail from './questionDetail'
+import hello from './hello';
 
 const rootReducer = combineReducers({
-  questions
-})
+  hello,
+  routing: routerReducer
+});
 
-export default rootReducer
+export default rootReducer;
