@@ -10,7 +10,7 @@ const defaultState = {};
 function helloReducer (state = defaultState, action) {
   switch(action.type) {
     case 'LOADED_HELLO':
-      state.hello = action.response.hello;
+      state = action.response;
       return state;
 
     default:

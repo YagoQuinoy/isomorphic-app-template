@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 // Components
-import SaluteForm from '../components/SaluteForm';
 
 // Actions
 import { loadHello } from '../actions/hello';
@@ -20,22 +19,21 @@ class Hello extends Component {
   }
 
   render() {
-    const hello = this.props.hello;
+    const meh = this.props.salute;
     return (
       <div>
-        <SaluteForm />
-        <h2>{ hello }</h2>
+        <h2>{ meh }</h2>
       </div>
     );
   }
 }
 
 Hello.propTypes = {
-  hello: PropTypes.object.isRequired
+  salute: PropTypes.string.isRequired
 };
 
 function mapStateToProps (state) {
-  return { hello: state.hello };
+  return { salute: state.hello };
 }
 
 export { Hello }; // NOTE: For testing purposes

@@ -4,6 +4,8 @@ import request from 'axios';
 // Config
 import config from '../../config';
 
+import { isBrowser } from '../utils';
+
 /**
  * Load all questions from api
  * @return {Object}
@@ -11,7 +13,7 @@ import config from '../../config';
 export function loadHello(params) {
   return {
     type: 'LOADED_HELLO',
-    promise: request.get(`${config.base}:${config.port}/api/hello/${params.name}`)
+    promise: request.get(`${config.baseUrl}:${config.port}/api/hello/${params.name}`)
       .then(res => {
         return res.data;
       })

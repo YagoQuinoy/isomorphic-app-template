@@ -19,7 +19,7 @@ const server = restify.createServer({
   log: logger
 });
 
-errorHandler.init(server);
+errorHandler.handleUncaughtException(server);
 
 // Logging
 server.use(restify.requestLogger());
@@ -35,6 +35,8 @@ if(config.env !== 'production' && config.logger.audit) {
 }
 
 router.init(server);
+
+errorHandler.handleExceptions(server);
 
 server.listen(config.port, () => {
   server.log.info(`${server.name} listening on ${config.port}`);

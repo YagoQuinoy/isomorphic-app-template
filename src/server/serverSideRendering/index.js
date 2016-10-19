@@ -1,6 +1,7 @@
 // Libs
 import url from 'url';
 import path from 'path';
+import _ from 'lodash';
 import ejs from 'ejs';
 import Promise from 'bluebird';
 import { createMemoryHistory } from 'history';
@@ -20,6 +21,7 @@ import createRoutes from '../../routes';
 import { getFullUrl } from '../utils';
 
 // Assets paths
+// TODO: Recoger de config
 const port = (process.env.NODE_ENV === 'development') ? 3001 : 3000;
 const favicon = `http://localhost:${port}/static/favicon.ico`;
 const scripts = [`http://localhost:${port}/static/app.bundle.js`];
@@ -40,12 +42,17 @@ function fetchComponentNeeds(dispatch, components, params) {
   components.splice(0, 1);
 
   const needs = components.reduce( (prev, current) => {
-    return (current.needs || [])
-      .concat((current.WrappedComponent ? current.WrappedComponent.needs : []) || [])
-      .concat(prev);
+    let componentNeeds = _.get(current, 'WrappedComponent.needs', []);
+    if(componentNeeds.length === 0){
+      componentNeeds = _.get(current, 'needs', []);
+    }
+
+    return componentNeeds.concat(prev);
   }, []);
 
-  const promises = needs.map(need => dispatch(need(params)));
+  const promises = needs.map((need) => {
+    return dispatch(need(params));
+  });
 
   return Promise.all(promises);
 }
@@ -64,7 +71,10 @@ export function render(req, res, next) {
     const routes = createRoutes(history);
 
     match({ routes, location: urlObj.pathname }, (err, redirectLocation, renderProps) => {
-      next.ifError(err);
+      if(err){
+        next(err);
+        return;
+      }
 
       if (redirectLocation) {
         res.redirect(301, redirectLocation.pathname + redirectLocation.search);
@@ -80,11 +90,14 @@ export function render(req, res, next) {
 
       fetchComponentNeeds(store.dispatch, renderProps.components, renderProps.params)
         .then(()=> {
-            const html = ReactDOMServer.renderToString(
+          const html = ReactDOMServer.renderToString(
               <Provider store={store}>
                 { <RouterContext {...renderProps}/> }
               </Provider>
             );
+
+            throw new Error('merde');
+            return;
 
             const reduxState = escape(JSON.stringify(store.getState()));
 
@@ -94,7 +107,9 @@ export function render(req, res, next) {
               scripts,
               reduxState
             }, function(err, rendered) {
-              next.ifError(err);
+              if(err){
+                return next(err);
+              }
 
               res.end(rendered);
               next();

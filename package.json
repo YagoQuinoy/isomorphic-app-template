@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/api.bundle.js",
-    "start:dev": "cross-env NODE_ENV=development concurrently --kill-others \"nodemon --watch src/server src/server/index.js --exec babel-node\" \"babel-node webpack.server.js\"",
+    "start:dev": "cross-env NODE_ENV=development concurrently --kill-others \"nodemon src/server/index.js --exec babel-node\" \"babel-node webpack.server.js\"",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "npm run build"
