@@ -6,13 +6,13 @@ export function handleUncaughtException(server) {
 };
 
 export function handleExceptions(server) {
-  server.on('after', (req, res, route, err) => {
+  server.on('InternalServer', (req, res, route, err) => {
     if(!err){
       return;
     }
 
     req.log.error(err);
-    res.send('Something went wrong...');
+    res.send(500, 'Something went wrong...');
 
   });
 };

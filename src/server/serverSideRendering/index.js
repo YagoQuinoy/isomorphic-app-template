@@ -4,6 +4,7 @@ import path from 'path';
 import _ from 'lodash';
 import ejs from 'ejs';
 import Promise from 'bluebird';
+import restify from 'restify';
 import { createMemoryHistory } from 'history';
 
 // React
@@ -116,7 +117,8 @@ export function render(req, res, next) {
             });
       })
       .catch((err)=> {
-        next(err);
+        // console.log(err);
+        next(new restify.errors.InternalServerError('petada'));
       });
     });
 }
