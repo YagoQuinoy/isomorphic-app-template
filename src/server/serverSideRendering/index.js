@@ -90,7 +90,7 @@ export function render(req, res, next) {
       }
 
       fetchComponentNeeds(store.dispatch, renderProps.components, renderProps.params)
-        .then(()=> {
+        .then(() => {
           const html = ReactDOMServer.renderToString(
               <Provider store={store}>
                 { <RouterContext {...renderProps}/> }
@@ -116,8 +116,7 @@ export function render(req, res, next) {
               next();
             });
       })
-      .catch((err)=> {
-        // console.log(err);
+      .catch((err) => {
         next(new restify.errors.InternalServerError('petada'));
       });
     });
