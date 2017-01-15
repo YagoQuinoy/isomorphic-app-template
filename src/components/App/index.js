@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 
-import styles from './app.css';
+const styles = (process.env.BROWSER) ? require('./app.css') : {}
 
 /**
  * Application component. Just a wrapper.
@@ -12,7 +12,7 @@ import styles from './app.css';
 class App extends Component {
   render() {
     return (
-      <div className="app">
+      <div className={styles.app}>
         <div className="container">
           <Header />
           <div>

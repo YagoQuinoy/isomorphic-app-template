@@ -10,12 +10,9 @@ import apiMiddleware from '../middleware/api';
 // Reducers
 import rootReducer from '../reducers';
 
-// Utils
-import { isBrowser } from '../utils';
-
 const middlewares = [apiMiddleware];
 
-if (config.env === 'development' && isBrowser()) {
+if (config.env === 'development' && process.env.BROWSER) {
   const loggerMiddleware = require('../middleware/logger').default;
   middlewares.push(loggerMiddleware);
 }

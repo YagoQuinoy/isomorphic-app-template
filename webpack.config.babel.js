@@ -50,12 +50,23 @@ const browserConfig = {
       exclude: /node_modules/,
       loader: 'babel-loader'
     }, {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract('style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+      test: /\.css$/,
+      loader: 'style-loader'
+    }, {
+      test: /\.css$/,
+      loader: 'css-loader',
+      query: {
+        modules: true,
+        localIdentName: '[name]__[local]___[hash:base64:5]'
+      }
     }]
   },
   plugins: [
+    new webpack.DefinePlugin({
+        'process.env': {
+            BROWSER: JSON.stringify(true)
+        }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['vendor'],
@@ -65,7 +76,7 @@ const browserConfig = {
   ]
 };
 
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   const baseUrl = config.baseUrl + ':' + config.webpackDevServerPort;
   browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`];
   browserConfig.output.publicPath = `${baseUrl}/static/`;
