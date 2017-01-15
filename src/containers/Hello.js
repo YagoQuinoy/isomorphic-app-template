@@ -19,10 +19,9 @@ class Hello extends Component {
   }
 
   render() {
-    const meh = this.props.salute;
     return (
       <div>
-        <h2>{ meh }</h2>
+        <h2>{ this.props.salute }</h2>
       </div>
     );
   }

@@ -1,10 +1,10 @@
 // Libs
+import restify from 'restify';
+
 import url from 'url';
 import path from 'path';
 import _ from 'lodash';
 import ejs from 'ejs';
-import Promise from 'bluebird';
-import restify from 'restify';
 import { createMemoryHistory } from 'history';
 
 // React
@@ -73,7 +73,7 @@ export function render(req, res, next) {
 
     match({ routes, location: urlObj.pathname }, (err, redirectLocation, renderProps) => {
       if(err){
-        next(err);
+        next(new restify.errors.InternalServerError(err));
         return;
       }
 
@@ -84,8 +84,7 @@ export function render(req, res, next) {
       }
 
       if (renderProps === null) {
-        res.send(404, 'Not found');
-        next();
+        next(new restify.errors.NotFoundError('Not found'));
         return;
       }
 
@@ -96,9 +95,6 @@ export function render(req, res, next) {
                 { <RouterContext {...renderProps}/> }
               </Provider>
             );
-
-            throw new Error('merde');
-            return;
 
             const reduxState = escape(JSON.stringify(store.getState()));
 
@@ -117,7 +113,7 @@ export function render(req, res, next) {
             });
       })
       .catch((err) => {
-        next(new restify.errors.InternalServerError('petada'));
+        next(new restify.errors.InternalServerError(err));
       });
     });
 }

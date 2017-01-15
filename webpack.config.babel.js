@@ -2,6 +2,8 @@
 import path from 'path';
 import webpack from 'webpack';
 
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
 // NOTE: Environment: production if npm run build, development npm run start:dev (required in webpack.server.js)
 import config from './config';
 
@@ -47,6 +49,10 @@ const browserConfig = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader'
+    }, {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: ExtractTextPlugin.extract('style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
     }]
   },
   plugins: [
@@ -54,7 +60,8 @@ const browserConfig = {
       name: 'vendor',
       chunks: ['vendor'],
       filename: 'vendor.js'
-    })
+    }),
+    new ExtractTextPlugin('styles.css')
   ]
 };
 

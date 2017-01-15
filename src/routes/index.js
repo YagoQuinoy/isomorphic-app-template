@@ -1,10 +1,6 @@
 // React
 import React from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
-// import { syncHistoryWithStore } from 'react-router-redux';
-
-// // Store
-// import configureStore from '../store/configureStore';
 
 // Components
 import App from '../components/App';
@@ -18,8 +14,6 @@ import Hello from '../containers/Hello';
  * @return {Object}
  */
 export default function(history) {
-  // const store = configureStore();
-  // const syncHistory = syncHistoryWithStore(history, store);
 
   return (
     <Router history={ history }>

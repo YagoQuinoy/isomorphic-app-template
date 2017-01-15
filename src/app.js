@@ -32,4 +32,4 @@ render((
   <Provider store={store}>
     { createRoutes(browserHistory) }
   </Provider>
-), document.getElementById('app'));
+), document.getElementById('root'));

@@ -32,7 +32,7 @@
   },
 
   "globals": {
-    // e.g. "angular": true
+    "Promise": true
   },
 
   "plugins": [

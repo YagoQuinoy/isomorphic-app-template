@@ -4,8 +4,6 @@ import request from 'axios';
 // Config
 import config from '../../config';
 
-import { isBrowser } from '../utils';
-
 /**
  * Load all questions from api
  * @return {Object}

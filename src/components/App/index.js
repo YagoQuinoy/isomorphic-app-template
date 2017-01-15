@@ -1,8 +1,10 @@
 // React/Redux
 import React, { Component, PropTypes } from 'react';
 
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../Header';
+import Footer from '../Footer';
+
+import styles from './app.css';
 
 /**
  * Application component. Just a wrapper.
@@ -10,7 +12,7 @@ import Footer from './Footer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="app">
         <div className="container">
           <Header />
           <div>
