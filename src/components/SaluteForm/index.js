@@ -1,6 +1,5 @@
 // React/Redux
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
 /**
  * Renders a list of loaded questions from api into links
@@ -18,8 +17,6 @@ class SaluteForm extends Component {
   }
 }
 
-SaluteForm.propTypes = {
-  // user: PropTypes.object.isRequired
-};
+SaluteForm.propTypes = {};
 
 export default SaluteForm;

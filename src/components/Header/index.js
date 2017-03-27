@@ -1,6 +1,5 @@
 // React/Redux
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 /**
  * Default root component. Shows a link to questions. It could ve a component.

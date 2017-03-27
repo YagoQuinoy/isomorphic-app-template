@@ -1,10 +1,10 @@
 // React/Redux
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import Header from '../Header';
 import Footer from '../Footer';
 
-const styles = (process.env.BROWSER) ? require('./app.css') : {}
+import styles from './app.css';
 
 /**
  * Application component. Just a wrapper.

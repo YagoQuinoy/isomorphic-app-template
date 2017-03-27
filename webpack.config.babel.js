@@ -2,8 +2,6 @@
 import path from 'path';
 import webpack from 'webpack';
 
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-
 // NOTE: Environment: production if npm run build, development npm run start:dev (required in webpack.server.js)
 import config from './config';
 
@@ -48,17 +46,25 @@ const browserConfig = {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'style-loader'
-    }, {
-      test: /\.css$/,
-      loader: 'css-loader',
+      loader: 'babel-loader',
       query: {
-        modules: true,
-        localIdentName: '[name]__[local]___[hash:base64:5]'
+        babelrc: false,
+        presets: [
+          'es2015',
+          'react'
+        ],
+        plugins: [
+          'transform-class-properties',
+          'transform-object-rest-spread'
+        ]
       }
+    }, {
+      test: /\.css$/,
+      loaders: [
+        'style-loader',
+        'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
+        'postcss-loader'
+      ]
     }]
   },
   plugins: [
@@ -71,8 +77,7 @@ const browserConfig = {
       name: 'vendor',
       chunks: ['vendor'],
       filename: 'vendor.js'
-    }),
-    new ExtractTextPlugin('styles.css')
+    })
   ]
 };
 
