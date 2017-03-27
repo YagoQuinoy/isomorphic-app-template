@@ -2,7 +2,7 @@
 import path from 'path';
 import webpack from 'webpack';
 
-// NOTE: Environment: production if npm run build, development npm run start:dev (required in webpack.server.js)
+// Config
 import config from './config';
 
 /**
@@ -22,7 +22,7 @@ const serverConfig = {
   },
   externals: [/^(?!\.|\/).+/i],
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       loader: 'babel-loader'
     }]
@@ -31,6 +31,8 @@ const serverConfig = {
 
 /**
  * Webpack browser configuration. jQuery as vendor.
+ * Avoid babelrc due to babel plugin 'css-modules-transform'
+ * for css import at server side rendering
  * @type {Object}
  */
 const browserConfig = {
@@ -43,7 +45,7 @@ const browserConfig = {
     filename: '[name].bundle.js'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
@@ -60,18 +62,25 @@ const browserConfig = {
       }
     }, {
       test: /\.css$/,
-      loaders: [
-        'style-loader',
-        'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]',
-        'postcss-loader'
-      ]
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1,
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      }, {
+        loader: 'postcss-loader'
+      }]
     }]
   },
   plugins: [
     new webpack.DefinePlugin({
-        'process.env': {
-            BROWSER: JSON.stringify(true)
-        }
+      'process.env': {
+        BROWSER: JSON.stringify(true)
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -81,8 +90,8 @@ const browserConfig = {
   ]
 };
 
-if (process.env.NODE_ENV === 'development') {
-  const baseUrl = config.baseUrl + ':' + config.webpackDevServerPort;
+if(process.env.NODE_ENV === 'development') {
+  const baseUrl = `${config.baseUrl}:${config.webpackDevServerPort}`;
   browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`];
   browserConfig.output.publicPath = `${baseUrl}/static/`;
 }

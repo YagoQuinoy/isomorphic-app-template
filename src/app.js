@@ -1,5 +1,5 @@
 // Libs
-import _ from 'lodash';
+import { each } from 'lodash';
 import 'babel-polyfill';
 
 // React
@@ -18,11 +18,11 @@ let reduxState = {};
 if (window.__REDUX_STATE__) {
   try {
     let plain = JSON.parse(unescape(window.__REDUX_STATE__));
-    _.each(plain, (val, key) => {
+    each(plain, (val, key) => {
       reduxState[key] = val;
     });
   } catch (e) {
-    console.error(e); // NOTE: Algo habrá que hacer aquí
+    // console.error(e); // NOTE: Algo habrá que hacer aquí
   }
 }
 

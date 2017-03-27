@@ -1,6 +1,6 @@
 // React
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route } from 'react-router';
 
 // Components
 import App from '../components/App';
@@ -14,7 +14,6 @@ import Hello from '../containers/Hello';
  * @return {Object}
  */
 export default function(history) {
-
   return (
     <Router history={ history }>
       <Route path="/" component={ App }>

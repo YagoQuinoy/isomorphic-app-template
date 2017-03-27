@@ -1,6 +1,10 @@
+// Libs
 import restify from 'restify';
 
+// Api
 import * as apiRoute from './api';
+
+// Server-Side Rendering
 import { render } from '../serverSideRendering';
 
 /**
@@ -8,17 +12,15 @@ import { render } from '../serverSideRendering';
  * @param  {Server} server
  */
 export function init(server) {
-  // Api
   apiRoute.route(server);
 
-  // Statics
   const staticPath = __dirname + '/../../';
   server.get(/\/static\/?.*|\/favicon.ico/, restify.serveStatic({
     directory: staticPath
   }));
 
-  // Server Side Rendering
   server.get(/.*/, (req, res, next) => {
     render(req, res, next);
+
   });
 };

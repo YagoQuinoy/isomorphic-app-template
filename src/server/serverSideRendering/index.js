@@ -72,7 +72,7 @@ export function render(req, res, next) {
     const routes = createRoutes(history);
 
     match({ routes, location: urlObj.pathname }, (err, redirectLocation, renderProps) => {
-      if(err){
+      if(err) {
         next(new restify.errors.InternalServerError(err));
         return;
       }
@@ -116,4 +116,5 @@ export function render(req, res, next) {
         next(new restify.errors.InternalServerError(err));
       });
     });
+
 }
