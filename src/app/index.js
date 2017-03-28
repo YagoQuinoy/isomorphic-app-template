@@ -24,6 +24,7 @@ if (window.__REDUX_STATE__) {
 
 const store = configureStore(reduxState);
 
+// TODO: Poner aquí bootstrap de React-Router Client
 render((
   <Provider store={store}>
     { createRoutes(browserHistory) }

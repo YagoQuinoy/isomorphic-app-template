@@ -28,6 +28,8 @@ if(process.env.NODE_ENV === 'development') {
   scripts.push(`http://localhost:${port}/static/dev.bundle.js`);
 }
 
+// TODO: Refactorizar entero por React-Router 4
+
 /**
  * If server rendered react app returned a promise (due to async ops), obtains that promise
  * and return it, else, creates a new resolved promise.
