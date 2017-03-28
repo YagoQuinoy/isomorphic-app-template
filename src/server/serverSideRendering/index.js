@@ -1,13 +1,10 @@
 // Libs
 import restify from 'restify';
-
 import url from 'url';
 import path from 'path';
-import _ from 'lodash';
+import {get} from 'lodash';
 import ejs from 'ejs';
 import { createMemoryHistory } from 'history';
-
-// React
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -43,9 +40,9 @@ function fetchComponentNeeds(dispatch, components, params) {
   components.splice(0, 1);
 
   const needs = components.reduce( (prev, current) => {
-    let componentNeeds = _.get(current, 'WrappedComponent.needs', []);
+    let componentNeeds = get(current, 'WrappedComponent.needs', []);
     if(componentNeeds.length === 0){
-      componentNeeds = _.get(current, 'needs', []);
+      componentNeeds = get(current, 'needs', []);
     }
 
     return componentNeeds.concat(prev);

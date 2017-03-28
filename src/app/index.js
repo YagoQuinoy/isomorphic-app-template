@@ -1,8 +1,6 @@
 // Libs
 import { each } from 'lodash';
 import 'babel-polyfill';
-
-// React
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -17,10 +15,8 @@ import createRoutes from './routes';
 let reduxState = {};
 if (window.__REDUX_STATE__) {
   try {
-    let plain = JSON.parse(unescape(window.__REDUX_STATE__));
-    each(plain, (val, key) => {
-      reduxState[key] = val;
-    });
+    const plain = JSON.parse(unescape(window.__REDUX_STATE__));
+    each(plain, (val, key) => reduxState[key] = val);
   } catch (e) {
     // console.error(e); // NOTE: Algo habrá que hacer aquí
   }

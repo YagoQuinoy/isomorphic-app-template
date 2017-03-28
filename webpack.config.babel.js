@@ -37,7 +37,7 @@ const serverConfig = {
  */
 const browserConfig = {
   entry: {
-    app: path.resolve(__dirname, './src/app.js'),
+    app: path.resolve(__dirname, './src/app/index.js'),
     vendor: ['jquery']
   },
   output: {
