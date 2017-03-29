@@ -19,9 +19,6 @@ class Hello extends Component {
   }
 
   render() {
-    console.log('----------------------------')
-    console.log(this.props)
-    console.log('----------------------------')
     return (
       <div>
         <h2>{ this.props.salute }</h2>
