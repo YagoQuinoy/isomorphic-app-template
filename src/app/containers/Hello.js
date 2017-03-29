@@ -11,6 +11,7 @@ import { loadHello } from '../actions/hello';
  * Renders retrieved question detail and user from api
  */
 class Hello extends Component {
+  // TODO: Peticiones asíncronas en server side render
   // static needs = [loadHello];
 
   componentDidMount() {
