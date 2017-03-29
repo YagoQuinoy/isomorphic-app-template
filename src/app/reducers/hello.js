@@ -1,5 +1,5 @@
-// Actions
-const defaultState = {};
+// Const
+const defaultState = '';
 
 /**
  * Questions reducers

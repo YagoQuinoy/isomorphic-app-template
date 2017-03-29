@@ -2,7 +2,7 @@
 import request from 'axios';
 
 // Config
-import config from '../../config';
+import config from '../../../config';
 
 /**
  * Load all questions from api

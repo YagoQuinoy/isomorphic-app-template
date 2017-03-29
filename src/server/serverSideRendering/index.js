@@ -1,22 +1,17 @@
 // Libs
-import restify from 'restify';
-import url from 'url';
 import path from 'path';
-import {get} from 'lodash';
 import ejs from 'ejs';
-import { createMemoryHistory } from 'history';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { RouterContext, match } from 'react-router';
 
 // Store
-import configureStore from '../../store/configureStore';
+import configureStore from '../../app/store/configureStore';
+import { StaticRouter } from 'react-router';
 
-// Fron-Router
-import createRoutes from '../../routes';
+import App from '../../app/components/App';
 
-import { getFullUrl } from '../utils';
+
 
 // Assets paths
 // TODO: Recoger de config
@@ -38,24 +33,24 @@ if(process.env.NODE_ENV === 'development') {
  * @param  {Object} renderProps
  * @return {Promise}
  */
-function fetchComponentNeeds(dispatch, components, params) {
-  components.splice(0, 1);
-
-  const needs = components.reduce( (prev, current) => {
-    let componentNeeds = get(current, 'WrappedComponent.needs', []);
-    if(componentNeeds.length === 0){
-      componentNeeds = get(current, 'needs', []);
-    }
-
-    return componentNeeds.concat(prev);
-  }, []);
-
-  const promises = needs.map((need) => {
-    return dispatch(need(params));
-  });
-
-  return Promise.all(promises);
-}
+// function fetchComponentNeeds(dispatch, components, params) {
+//   components.splice(0, 1);
+//
+//   const needs = components.reduce((prev, current) => {
+//     let componentNeeds = get(current, 'WrappedComponent.needs', []);
+//     if(componentNeeds.length === 0) {
+//       componentNeeds = get(current, 'needs', []);
+//     }
+//
+//     return componentNeeds.concat(prev);
+//   }, []);
+//
+//   const promises = needs.map((need) => {
+//     return dispatch(need(params));
+//   });
+//
+//   return Promise.all(promises);
+// }
 
 /**
  * Server rendering a React application
@@ -64,56 +59,91 @@ function fetchComponentNeeds(dispatch, components, params) {
  * @param  {Function} next
  */
 export function render(req, res, next) {
-    const urlObj = url.parse(getFullUrl(req));
+  // const urlObj = url.parse(getFullUrl(req));
+  //
+  // const history = createMemoryHistory(urlObj.href);
+  const store = configureStore();
+  // const routes = createRoutes(history);
+  //
+  // match({ routes, location: urlObj.pathname }, (err, redirectLocation, renderProps) => {
+  //   if(err) {
+  //     next(new restify.errors.InternalServerError(err));
+  //     return;
+  //   }
+  //
+  //   if (redirectLocation) {
+  //     res.redirect(301, redirectLocation.pathname + redirectLocation.search);
+  //     next();
+  //     return;
+  //   }
+  //
+  //   if (renderProps === null) {
+  //     next(new restify.errors.NotFoundError('Not found'));
+  //     return;
+  //   }
+  //
+  //   fetchComponentNeeds(store.dispatch, renderProps.components, renderProps.params)
+  //     .then(() => {
+  //       const html = ReactDOMServer.renderToString(
+  //           <Provider store={store}>
+  //             { <RouterContext {...renderProps}/> }
+  //           </Provider>
+  //         );
+  //
+  //         const reduxState = escape(JSON.stringify(store.getState()));
+  //
+  //         ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
+  //           html,
+  //           favicon,
+  //           scripts,
+  //           reduxState
+  //         }, function(err, rendered) {
+  //           if(err){
+  //             return next(err);
+  //           }
+  //
+  //           res.end(rendered);
+  //           next();
+  //         });
+  //   })
+  //   .catch((err) => {
+  //     next(new restify.errors.InternalServerError(err));
+  //   });
+  // });
 
-    const history = createMemoryHistory(urlObj.href);
-    const store = configureStore();
-    const routes = createRoutes(history);
+  const context = {};
 
-    match({ routes, location: urlObj.pathname }, (err, redirectLocation, renderProps) => {
-      if(err) {
-        next(new restify.errors.InternalServerError(err));
-        return;
-      }
+  const html = ReactDOMServer.renderToString(
+    <StaticRouter location = { req.url } context = { context } >
+      <Provider store = { store } >
+        <App / >
+      </Provider>
+    </StaticRouter>
+  );
 
-      if (redirectLocation) {
-        res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-        next();
-        return;
-      }
 
-      if (renderProps === null) {
-        next(new restify.errors.NotFoundError('Not found'));
-        return;
-      }
-
-      fetchComponentNeeds(store.dispatch, renderProps.components, renderProps.params)
-        .then(() => {
-          const html = ReactDOMServer.renderToString(
-              <Provider store={store}>
-                { <RouterContext {...renderProps}/> }
-              </Provider>
-            );
-
-            const reduxState = escape(JSON.stringify(store.getState()));
-
-            ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
-              html,
-              favicon,
-              scripts,
-              reduxState
-            }, function(err, rendered) {
-              if(err){
-                return next(err);
-              }
-
-              res.end(rendered);
-              next();
-            });
-      })
-      .catch((err) => {
-        next(new restify.errors.InternalServerError(err));
-      });
+  if(context.url) {
+    res.writeHead(301, {
+      Location: context.url
     });
+    res.end();
+    return;
+  }
 
+  const reduxState = escape(JSON.stringify(store.getState()));
+
+  ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
+    html,
+    favicon,
+    scripts,
+    reduxState
+  }, (err, rendered) => {
+    if(err) {
+      next(err);
+      return;
+    }
+
+    res.end(rendered);
+    next();
+  });
 }

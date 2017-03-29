@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware } from 'redux';
 
 // Config
-import config from '../../config';
+import config from '../../../config';
 
 // Api middleware
 import apiMiddleware from '../middleware/api';

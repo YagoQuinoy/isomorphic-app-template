@@ -1,18 +1,17 @@
 // Libs
 import { each } from 'lodash';
-import 'babel-polyfill';
+import 'babel-polyfill'; // NOTE: Hace falta?
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { browserHistory } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
+
+import { App } from './components/App';
 
 // Store
 import configureStore from './store/configureStore';
 
-// Router
-import createRoutes from './routes';
-
-let reduxState = {};
+const reduxState = {};
 if (window.__REDUX_STATE__) {
   try {
     const plain = JSON.parse(unescape(window.__REDUX_STATE__));
@@ -24,9 +23,10 @@ if (window.__REDUX_STATE__) {
 
 const store = configureStore(reduxState);
 
-// TODO: Poner aquí bootstrap de React-Router Client
 render((
-  <Provider store={store}>
-    { createRoutes(browserHistory) }
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 ), document.getElementById('root'));

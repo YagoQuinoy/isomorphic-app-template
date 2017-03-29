@@ -11,14 +11,17 @@ import { loadHello } from '../actions/hello';
  * Renders retrieved question detail and user from api
  */
 class Hello extends Component {
-  static needs = [loadHello];
+  // static needs = [loadHello];
 
   componentDidMount() {
-    const { params, loadHello } = this.props;
-    loadHello(params);
+    const { match, loadHello } = this.props;
+    loadHello(match.params);
   }
 
   render() {
+    console.log('----------------------------')
+    console.log(this.props)
+    console.log('----------------------------')
     return (
       <div>
         <h2>{ this.props.salute }</h2>
