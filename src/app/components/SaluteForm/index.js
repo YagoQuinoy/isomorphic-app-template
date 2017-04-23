@@ -1,5 +1,6 @@
 // React/Redux
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 
 /**
  * Renders a list of loaded questions from api into links
@@ -13,10 +14,12 @@ class SaluteForm extends Component {
           <input type="text" placeholder="Put your name here!" />
         </form>
       </div>
-    );
+    )
   }
 }
 
-SaluteForm.propTypes = {};
+SaluteForm.propTypes = {
+  // user: PropTypes.object.isRequired
+}
 
-export default SaluteForm;
+export default SaluteForm

@@ -1,18 +1,18 @@
 export function handleUncaughtException(server) {
-  server.on('uncaughtException', (req, res, route, err) => {
-    req.log.error(err);
-    res.send(500, 'Something went wrong...');
-  });
-};
+  server.on('uncaughtException', (req, res, err) => {
+    req.log.error(err)
+    res.send(500, 'Something went wrong...')
+  })
+}
 
 export function handleExceptions(server) {
   server.on('InternalServer', (req, res, err) => {
     if(!err){
-      return;
+      return
     }
 
-    req.log.error(err);
-    res.send(500, 'Something went wrong...');
+    req.log.error(err)
+    res.send(500, 'Something went wrong...')
 
-  });
-};
+  })
+}

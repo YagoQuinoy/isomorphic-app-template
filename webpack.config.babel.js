@@ -1,9 +1,10 @@
 // Libs
-import path from 'path';
-import webpack from 'webpack';
+import path from 'path'
+import webpack from 'webpack'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 // Config
-import config from './config';
+import config from './config'
 
 /**
  * Thanks Ambroos!
@@ -15,6 +16,9 @@ const serverConfig = {
     api: path.resolve(__dirname, './src/server/index.js')
   },
   target: 'node',
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   output: {
     path: path.resolve(__dirname, './dist/'),
     filename: '[name].bundle.js',
@@ -23,11 +27,11 @@ const serverConfig = {
   externals: [/^(?!\.|\/).+/i],
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       loader: 'babel-loader'
     }]
   }
-};
+}
 
 /**
  * Webpack browser configuration. jQuery as vendor.
@@ -44,9 +48,12 @@ const browserConfig = {
     path: path.resolve(__dirname, './static/'),
     filename: '[name].bundle.js'
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
@@ -62,24 +69,30 @@ const browserConfig = {
       }
     }, {
       test: /\.css$/,
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader',
-        options: {
-          importLoaders: 1,
-          modules: true,
-          localIdentName: '[name]__[local]___[hash:base64:5]'
-        }
-      }, {
-        loader: 'postcss-loader'
-      }]
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        //resolve-url-loader may be chained before sass-loader if necessary
+        use: [{
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            importLoaders: 1,
+            modules: true,
+            localIdentName: '[name]__[local]___[hash:base64:5]'
+          }
+        }, {
+          loader: 'postcss-loader'
+        }]
+      })
+
     }]
   },
   plugins: [
+    new ExtractTextPlugin('styles.css'),
     new webpack.DefinePlugin({
       'process.env': {
-        BROWSER: JSON.stringify(true)
+        BROWSER: JSON.stringify(true),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
     new webpack.optimize.CommonsChunkPlugin({
@@ -88,12 +101,13 @@ const browserConfig = {
       filename: 'vendor.js'
     })
   ]
-};
-
-if(process.env.NODE_ENV === 'development') {
-  const baseUrl = `${config.baseUrl}:${config.webpackDevServerPort}`;
-  browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`];
-  browserConfig.output.publicPath = `${baseUrl}/static/`;
 }
 
-export default [browserConfig, serverConfig];
+if(process.env.NODE_ENV === 'development') {
+  browserConfig.devtool = 'eval'
+  const baseUrl = `${config.server.url}:${config.server.webpackDevServerPort}`
+  browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`]
+  browserConfig.output.publicPath = `${baseUrl}/static/`
+}
+
+export default [browserConfig, serverConfig]

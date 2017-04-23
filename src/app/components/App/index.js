@@ -1,39 +1,44 @@
 // Libs
-import React, { Component } from 'react';
-import {
-  Route,
-  Switch
-} from 'react-router-dom';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-// Containers
-import Hello from '../../containers/Hello';
+// Componentes
+import Header from '../Header'
+import Footer from '../Footer'
 
-// Components
-import Header from '../Header';
-import Footer from '../Footer';
+// Routes
+import routes from '../../routes'
 
-// Styles
-import styles from './app.css';
+import styles from './app.css'
 
 /**
  * Application component. Just a wrapper.
  */
 class App extends Component {
   render() {
-    return (
-        <div className={styles.app}>
-          <div className="container">
+    const LayoutRoute = ({component: Component, ...rest}) => (
+      <Route
+        {...rest}
+        render={(props) => {
+        // TODO: Escoger layout
+        return (
+          <div className={styles.app}>
             <Header />
-            <div>
-              <Switch>
-                <Route exact path="/hello/:name" component={ Hello } />
-              </Switch>
-              </div>
+            <div className="container">
+              <Component {...props}/>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-    );
+        )
+      }}/>
+    )
+
+    return (
+      <Switch>
+        { routes.map((route, index) => (<LayoutRoute key={index} {...route} />)) }
+      </Switch>
+    )
   }
 }
 
-export default App;
+export default App

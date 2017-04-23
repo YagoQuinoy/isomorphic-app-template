@@ -1,5 +1,5 @@
-// Const
-const defaultState = '';
+// Actions
+const defaultState = {}
 
 /**
  * Questions reducers
@@ -10,12 +10,12 @@ const defaultState = '';
 function helloReducer (state = defaultState, action) {
   switch(action.type) {
     case 'LOADED_HELLO':
-      state = action.response;
-      return state;
+      state = action.response
+      return state
 
     default:
-      return state;
+      return state
   }
 }
 
-export default helloReducer;
+export default helloReducer

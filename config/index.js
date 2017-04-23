@@ -1,14 +1,15 @@
 // Libs
-import _ from 'lodash';
+import { merge } from 'lodash'
 
-const port = 3000;
 
 const config = {
-  baseUrl: process.env.BASE_URL || 'http://localhost',
-  port: process.env.PORT || port
-};
+  server: {
+    url: process.env.SERVER_URL || 'http://localhost',
+    port: process.env.SERVER_PORT || 3000
+  }
+}
 
 // NOTE: Webpack don't like 'process.env' inside a 'require()', outputing 'ReferenceError'
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'production'
 
-export default _.merge({}, config, require('./' + env + '.js').default || {});
+export default merge({}, config, require(`./${env}.js`).default || {})
