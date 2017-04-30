@@ -1,19 +1,21 @@
 // React/Redux
 import React, { Component } from 'react'
 
-import styles from './header.css'
+import styles from './home.css'
+
 
 /**
  * Default root component. Shows a link to questions. It could ve a component.
  */
-class Header extends Component {
+class Home extends Component {
   render() {
+    const text = 'Home sweet home'
     return (
-      <div className={ styles.header }>
-        <h1>Isomorphic App Template</h1>
+      <div className={ styles.home }>
+        { text }
       </div>
     )
   }
 }
 
-export default Header
+export default Home

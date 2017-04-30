@@ -24,17 +24,17 @@ import config from '../../../config'
 import routes from '../../app/routes'
 
 // Utils
-import { getOrigin } from '../utils'
+// import { getOrigin } from '../utils'
 
 // Assets paths
-const port = (config.env === 'development') ?
-  config.server.webpackDevServerPort : config.server.port
+const serverConfig = (config.env === 'development') ? config.webpackServer : config.port
 
-const favicon = `${config.server.url}:${port}/static/favicon.ico`
-const scripts = [`${config.server.url}:${port}/static/app.bundle.js`]
+const favicon = `${serverConfig.url}:${serverConfig.port}/static/favicon.ico`
+const scripts = [`${serverConfig.url}:${serverConfig.port}/static/app.bundle.js`]
+const styles = `${serverConfig.url}:${serverConfig.port}/static/styles.css`
 
 if (config.env === 'development') {
-  scripts.push(`${config.server.url}:${port}/static/dev.bundle.js`)
+  scripts.push(`${serverConfig.url}:${serverConfig.port}/static/dev.bundle.js`)
 }
 
 /**
@@ -112,6 +112,7 @@ export function render(req, res, next) {
       ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
         html,
         favicon,
+        styles,
         scripts,
         initialState
       }, (err, rendered) => {

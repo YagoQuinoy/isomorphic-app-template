@@ -26,11 +26,11 @@ new WebpackDevServer(webpack(browserConfig), {
     timings: true,
     chunks: false
   }
-}).listen(config.webpackDevServerPort, 'localhost', function(err) {
+}).listen(config.webpackServer.port, 'localhost', function(err) {
   if(err) {
     logger.error(err)
     return
   }
 
-  logger.info(`Webpack dev server is listening at localhost: ${config.port}`)
+  logger.info(`Webpack dev server is listening at localhost: ${config.webpackServer.port}`)
 })

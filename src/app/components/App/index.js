@@ -22,7 +22,7 @@ class App extends Component {
         render={(props) => {
         // TODO: Escoger layout
         return (
-          <div className={styles.app}>
+          <div className={ styles.app }>
             <Header />
             <div className="container">
               <Component {...props}/>

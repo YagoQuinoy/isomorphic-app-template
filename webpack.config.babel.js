@@ -84,7 +84,6 @@ const browserConfig = {
           loader: 'postcss-loader'
         }]
       })
-
     }]
   },
   plugins: [
@@ -105,7 +104,7 @@ const browserConfig = {
 
 if(process.env.NODE_ENV === 'development') {
   browserConfig.devtool = 'eval'
-  const baseUrl = `${config.server.url}:${config.server.webpackDevServerPort}`
+  const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
   browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`]
   browserConfig.output.publicPath = `${baseUrl}/static/`
 }
