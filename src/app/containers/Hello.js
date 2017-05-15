@@ -14,12 +14,10 @@ class Hello extends Component {
   componentDidMount() {
     const { params, loadHello } = this.props
     loadHello(params).then(() => {
-      console.log('qué rico')
     })
   }
 
   render() {
-    console.log('Lo que quieres de verdad')
     return (
       <div>
         <h2>{ this.props.salute }</h2>

@@ -1,13 +1,16 @@
-// Containers
-import Hello from './containers/Hello'
+// Components
+import Form from './components/Form'
 import Home from './components/Home'
+import Other from './components/Other'
 
-// TODO: Añadir variable
 export default [{
   exact: true,
   path: '/',
   component: Home
 }, {
-  path: '/hello/:name',
-  component: Hello
+  path: '/form',
+  component: Form
+}, {
+  path: '/other',
+  component: Other
 }]

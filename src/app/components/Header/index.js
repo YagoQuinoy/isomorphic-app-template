@@ -1,5 +1,6 @@
 // React/Redux
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './header.css'
 
@@ -9,9 +10,26 @@ import styles from './header.css'
 class Header extends Component {
   render() {
     return (
-      <div className={ styles.header }>
+      <header className={ styles.header }>
         <h1>Isomorphic App Template</h1>
-      </div>
+        <ul className={ styles.navigation }>
+          <li>
+            <Link to={ '/' }>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to={ '/form' }>
+              Form
+            </Link>
+          </li>
+          <li>
+            <Link to={ '/other' }>
+              Other
+            </Link>
+          </li>
+        </ul>
+      </header>
     )
   }
 }

@@ -24,7 +24,7 @@ class App extends Component {
         render={(props) => {
         return (
           <div className={ styles.app }>
-            <Header />
+            <Header/>
             <div className={ styles.container }>
               <Component {...props}/>
             </div>

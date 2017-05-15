@@ -41118,7 +41118,7 @@ var Footer = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'footer',
         { className: _footer2.default.footer },
         _react2.default.createElement(
           'a',
@@ -41180,12 +41180,31 @@ var Header = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
+        'header',
         { className: _header2.default.header },
         _react2.default.createElement(
           'h1',
           null,
           'Isomorphic App Template'
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: _header2.default.navigation },
+          _react2.default.createElement(
+            'li',
+            null,
+            'enlace 1'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            'enlace 2'
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            'enlace 3'
+          )
         )
       );
     }
@@ -48362,7 +48381,7 @@ module.exports = {"footer":"footer__footer___3isEy"};
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"header":"header__header___2pvUy"};
+module.exports = {"header":"header__header___2pvUy","navigation":"header__navigation___PnaMJ"};
 
 /***/ }),
 /* 480 */

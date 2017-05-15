@@ -452,6 +452,7 @@ html {
 }
 
 .app__app___2n36C {
+  background-color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -459,29 +460,56 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
-  margin: 0 auto;
-  background-color: pink;
+  height: 100%;
 }
-
-@media screen and (min-width: 960px) {
-
-  .app__app___2n36C {
-    width: 960px;
-    height: 100%;
-  }
-  }
 
 .app__container___3rJ2A {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+
+  width: 100%;
+  margin: 0 auto
 }
+
+@media screen and (min-width: 960px) {
+
+  .app__container___3rJ2A {
+    width: 960px;
+  }
+  }
 .header__header___2pvUy {
-  background-color: red;
+  background-color: black;
+  color: white;
+}
+
+.header__navigation___PnaMJ {
+  background-color: lightgrey;
+  width
+  & li {
+    display: inline-block;
+  }
 }
 .footer__footer___3isEy {
-  background-color: blue;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: dimgrey;
+  height: 50px
+}
+.footer__footer___3isEy > a {}
+.footer__footer___3isEy > a:link,
+    .footer__footer___3isEy > a:visited {
+  color: white
+}
+.footer__footer___3isEy > a:hover {
+  color: black
 }
 .home__home___h2Ghr {
   background-color: green;

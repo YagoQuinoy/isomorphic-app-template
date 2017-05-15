@@ -63,21 +63,19 @@ export default {
       }
     }, {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        //resolve-url-loader may be chained before sass-loader if necessary
-        use: [{
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
-            modules: true, // Enable CSS modules
-            importLoaders: 1, // Number of loaders before css-loaders
-            localIdentName: '[name]__[local]___[hash:base64:5]'
-          }
-        }, {
-          loader: 'postcss-loader'
-        }]
-      })
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+          modules: true, // Enable CSS modules
+          importLoaders: 1, // Number of loaders before css-loaders
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      }, {
+        loader: 'postcss-loader'
+      }]
     }, {
       test: /\.(png|jpg)$/,
       loader: 'file-loader?name=[name].[ext]&outputPath=img/'

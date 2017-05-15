@@ -1,3 +1,11 @@
 .header {
-  background-color: red;
+  background-color: darkslategrey;
+  color: white;
+}
+
+.navigation {
+  background-color: darkslategrey;
+  & > li {
+    display: inline-block;
+  }
 }

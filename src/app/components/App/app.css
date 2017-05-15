@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body,
 body > div,
 html {
@@ -5,17 +11,18 @@ html {
 }
 
 .app {
+  background-color: white;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 0 auto;
-  @media screen and (min-width: 960px) {
-    width: 960px;
-    height: 100%;
-  }
-  background-color: pink;
+  height: 100%;
 }
 
 .container {
   flex: 1;
+
+  width: 100%;
+  margin: 0 auto;
+  @media screen and (min-width: 960px) {
+    width: 960px;
+  }
 }
