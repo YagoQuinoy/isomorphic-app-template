@@ -8,10 +8,18 @@ import styles from './form.css'
  */
 class Form extends Component {
   render() {
-    const text = 'Form sweet form'
     return (
       <div className={ styles.form }>
-        { text }
+        <form>
+          <div>
+            <lable>input1</lable>
+            <input type="text" />
+          </div>
+          <div>
+            <lable>input2</lable>
+            <input type="text" />
+          </div>
+        </form>
       </div>
     )
   }

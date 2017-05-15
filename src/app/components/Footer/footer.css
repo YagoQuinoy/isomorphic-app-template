@@ -9,8 +9,5 @@
     &:visited {
       color: white;
     }
-    &:hover {
-      color: black;
-    }
   }
 }

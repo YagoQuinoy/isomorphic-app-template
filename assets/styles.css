@@ -445,6 +445,12 @@ template {
 [hidden] {
   display: none;
 }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body,
 body > div,
 html {
@@ -479,16 +485,25 @@ html {
   }
   }
 .header__header___2pvUy {
-  background-color: black;
+  background-color: darkslategrey;
   color: white;
 }
 
 .header__navigation___PnaMJ {
-  background-color: lightgrey;
-  width
-  & li {
-    display: inline-block;
-  }
+  background-color: darkslategrey
+}
+
+.header__navigation___PnaMJ > li {
+  display: inline-block;
+  padding: 16px;
+  padding: 1rem;
+}
+
+.header__navigation___PnaMJ > li > a {}
+
+.header__navigation___PnaMJ > li > a:link,
+      .header__navigation___PnaMJ > li > a:visited {
+  color: white;
 }
 .footer__footer___3isEy {
   display: -webkit-box;
@@ -500,7 +515,7 @@ html {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: dimgrey;
+  background-color: darkslategrey;
   height: 50px
 }
 .footer__footer___3isEy > a {}
@@ -508,9 +523,12 @@ html {
     .footer__footer___3isEy > a:visited {
   color: white
 }
-.footer__footer___3isEy > a:hover {
-  color: black
+.form__form___2aI4f {
+  background-color: yellow;
 }
 .home__home___h2Ghr {
   background-color: green;
+}
+.other__other___3tPDl {
+  background-color: blue;
 }
