@@ -2,14 +2,16 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
+// Styles
+import 'normalize.css'
+import styles from './app.css'
+
 // Componentes
 import Header from '../Header'
 import Footer from '../Footer'
 
 // Routes
 import routes from '../../routes'
-
-import styles from './app.css'
 
 /**
  * Application component. Just a wrapper.
@@ -20,11 +22,10 @@ class App extends Component {
       <Route
         {...rest}
         render={(props) => {
-        // TODO: Escoger layout
         return (
           <div className={ styles.app }>
             <Header />
-            <div className="container">
+            <div className={ styles.container }>
               <Component {...props}/>
             </div>
             <Footer />

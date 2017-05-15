@@ -13,29 +13,22 @@ import { StaticRouter } from 'react-router'
 // Components
 import App from '../../app/components/App'
 
-// Container
-// import Header from '../../app/containers/Header'
-// import Footer from '../../app/containers/Footer'
-
 // Config
 import config from '../../../config'
 
 // Routes
 import routes from '../../app/routes'
 
-// Utils
-// import { getOrigin } from '../utils'
-
 // Assets paths
-const serverConfig = (config.env === 'development') ? config.webpackServer : config.port
+const serverConfig = (config.env === 'development') ? config.webpackServer : config.server
 
-const favicon = `${serverConfig.url}:${serverConfig.port}/static/favicon.ico`
-const scripts = [`${serverConfig.url}:${serverConfig.port}/static/app.bundle.js`]
-const styles = `${serverConfig.url}:${serverConfig.port}/static/styles.css`
+const favicon = `${serverConfig.url}:${serverConfig.port}/assets/favicon.ico`
+const scripts = [`${serverConfig.url}:${serverConfig.port}/assets/app.bundle.js`]
+const styles = `${serverConfig.url}:${serverConfig.port}/assets/styles.css`
 
-if (config.env === 'development') {
-  scripts.push(`${serverConfig.url}:${serverConfig.port}/static/dev.bundle.js`)
-}
+// if (config.env === 'development') {
+//   scripts.push(`${serverConfig.url}:${serverConfig.port}/assets/dev.bundle.js`)
+// }
 
 /**
  * Server rendering a React application
@@ -56,9 +49,7 @@ export function render(req, res, next) {
 
     if (match && needs) {
       needs.forEach((need) => {
-        console.log(req.params)
         const action = need()
-        console.log(action)
         promises.push(store.dispatch(action))
       })
     }
@@ -66,27 +57,11 @@ export function render(req, res, next) {
     return match
   })
 
-  // TODO: Mmmmmmmmm esta es la forma adecuada? mmmm no sé
-  // if(App.needs) {
-  //   const action = App.needs(origin)
-  //   promises.push(store.dispatch(action))
-  // }
-  //
-  // if(Header.needs) {
-  //   const action = Header.needs(origin)
-  //   promises.push(store.dispatch(action))
-  // }
-  //
-  // if(Footer.needs) {
-  //   const action = Footer.needs(origin)
-  //   promises.push(store.dispatch(action))
-  // }
-
   Promise.all(promises)
     .then(() => {
       const context = {}
 
-      // Get htmk
+      // Get html
       const html = ReactDOMServer.renderToString(
         <StaticRouter location = { req.url } context = { context } >
           <Provider store = { store } >
@@ -109,7 +84,8 @@ export function render(req, res, next) {
       const initialState = escape(JSON.stringify(state))
 
       // Render template
-      ejs.renderFile(path.resolve(__dirname + '/templates/index.ejs'), {
+      const templatePath = path.resolve(`${__dirname}/templates/index.ejs`)
+      ejs.renderFile(templatePath, {
         html,
         favicon,
         styles,

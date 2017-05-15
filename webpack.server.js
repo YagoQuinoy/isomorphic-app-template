@@ -7,7 +7,7 @@ import bunyan from 'bunyan'
 import config from './config'
 
 // Webpack config
-import webpackConfig from './webpack.config.babel'
+import webpackConfig from './webpack/webpack.config.babel'
 
 const logger = bunyan.createLogger({
   name: 'webpackDevServer',
@@ -17,9 +17,12 @@ const logger = bunyan.createLogger({
 const browserConfig = webpackConfig[0]
 new WebpackDevServer(webpack(browserConfig), {
   publicPath: browserConfig.output.publicPath,
-  // hot: true,
+  headers: { 'Access-Control-Allow-Origin': '*' },
+  hot: true,
+  inline: true,
   historyApiFallback: true,
   compress: true,
+  noInfo: true,
   stats: {
     colors: true,
     hash: true,

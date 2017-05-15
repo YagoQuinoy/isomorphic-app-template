@@ -4,34 +4,10 @@ import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 // Config
-import config from './config'
+import config from '../../config'
 
-/**
- * Thanks Ambroos!
- * http://stackoverflow.com/questions/37369053/webpack-babel-config-for-both-server-and-client-javascript
- * @type {Object}
- */
-const serverConfig = {
-  entry: {
-    api: path.resolve(__dirname, './src/server/index.js')
-  },
-  target: 'node',
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  output: {
-    path: path.resolve(__dirname, './dist/'),
-    filename: '[name].bundle.js',
-    libraryTarget: 'commonjs'
-  },
-  externals: [/^(?!\.|\/).+/i],
-  module: {
-    rules: [{
-      test: /\.jsx?$/,
-      loader: 'babel-loader'
-    }]
-  }
-}
+const appPath = path.resolve(__dirname, '../../src/app/index.js')
+const outputPath = path.resolve(__dirname, '../../assets/')
 
 /**
  * Webpack browser configuration. jQuery as vendor.
@@ -39,14 +15,15 @@ const serverConfig = {
  * for css import at server side rendering
  * @type {Object}
  */
-const browserConfig = {
+export default {
   entry: {
-    app: path.resolve(__dirname, './src/app/index.js'),
-    vendor: ['jquery']
+    app: appPath,
+    vendor: ['react']
   },
   output: {
-    path: path.resolve(__dirname, './static/'),
-    filename: '[name].bundle.js'
+    path: outputPath,
+    filename: '[name].bundle.js',
+    publicPath: `${config.server.url}:${config.server.port}/assets/`
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -76,21 +53,23 @@ const browserConfig = {
           loader: 'css-loader',
           options: {
             sourceMap: true,
-            importLoaders: 1,
-            modules: true,
+            modules: true, // Enable CSS modules
+            importLoaders: 1, // Number of loaders before css-loaders
             localIdentName: '[name]__[local]___[hash:base64:5]'
           }
         }, {
           loader: 'postcss-loader'
         }]
       })
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'file-loader?name=[name].[ext]&outputPath=img/'
     }]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
     new webpack.DefinePlugin({
       'process.env': {
-        BROWSER: JSON.stringify(true),
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
@@ -101,12 +80,3 @@ const browserConfig = {
     })
   ]
 }
-
-if(process.env.NODE_ENV === 'development') {
-  browserConfig.devtool = 'eval'
-  const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
-  browserConfig.entry.dev = [`webpack-dev-server/client?${baseUrl}`]
-  browserConfig.output.publicPath = `${baseUrl}/static/`
-}
-
-export default [browserConfig, serverConfig]

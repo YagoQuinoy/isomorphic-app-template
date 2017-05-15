@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 
 import styles from './home.css'
 
-
 /**
  * Default root component. Shows a link to questions. It could ve a component.
  */

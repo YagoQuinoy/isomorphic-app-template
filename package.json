@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "An ES6 webpack babel isomorphic app",
   "scripts": {
-    "build": "webpack",
+    "build": "npm run clean && npm run webpack",
+    "clean": "rimraf ./assets/img && rimraf ./dist",
     "postinstall": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/api.bundle.js",
     "start:dev": "cross-env NODE_ENV=development concurrently --kill-others \"nodemon src/server/index.js --exec babel-node\" \"babel-node webpack.server.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config ./webpack/webpack.config.babel.js"
   },
   "author": "Yago Quiñoy Lobariñas",
   "license": "ISC",
@@ -26,13 +28,14 @@
     "css-loader": "^0.28.0",
     "ejs": "^2.5.6",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "history": "^4.6.1",
     "immutable": "^3.8.1",
-    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
+    "normalize.css": "^7.0.0",
+    "postcss-cssnext": "^2.10.0",
     "postcss-loader": "^1.3.3",
     "postcss-modules": "^0.6.4",
-    "precss": "^1.4.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
@@ -52,6 +55,7 @@
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^6.10.3",
     "nodemon": "^1.11.0",
+    "react-hot-loader": "^3.0.0-beta.7",
     "webpack-dev-server": "^2.4.2"
   }
 }
