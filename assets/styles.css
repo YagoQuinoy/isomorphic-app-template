@@ -446,8 +446,6 @@ template {
   display: none;
 }
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
 }
 
@@ -462,11 +460,11 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  min-height: 100%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 100%;
 }
 
 .app__container___3rJ2A {
@@ -524,11 +522,10 @@ html {
   color: white
 }
 .form__form___2aI4f {
-  background-color: yellow;
 }
 .home__home___h2Ghr {
-  background-color: green;
+  font-size: 25.6px;
+  font-size: 1.6rem;
 }
 .other__other___3tPDl {
-  background-color: blue;
 }

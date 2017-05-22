@@ -1,7 +1,6 @@
 // Libs
 import { resolve } from 'path'
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 // Config
 import config from '../../config'
@@ -49,18 +48,7 @@ export default {
     rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        babelrc: false,
-        presets: [
-          ['es2015', {'modules': false}],
-          'react'
-        ],
-        plugins: [
-          'transform-class-properties',
-          'transform-object-rest-spread'
-        ]
-      }
+      loader: 'babel-loader'
     }, {
       test: /\.css$/,
       use: [{
@@ -82,7 +70,6 @@ export default {
     }]
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(config.env)

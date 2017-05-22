@@ -7,14 +7,13 @@ import bunyan from 'bunyan'
 import config from './config'
 
 // Webpack config
-import webpackConfig from './webpack/webpack.config.babel'
+import browserConfig from './webpack/browser/webpack.config.babel'
 
 const logger = bunyan.createLogger({
   name: 'webpackDevServer',
   stream: process.stdout
 })
 
-const browserConfig = webpackConfig[0]
 new WebpackDevServer(webpack(browserConfig), {
   publicPath: browserConfig.output.publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' },

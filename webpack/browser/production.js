@@ -32,18 +32,7 @@ export default {
     rules: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        babelrc: false,
-        presets: [
-          'es2015',
-          'react'
-        ],
-        plugins: [
-          'transform-class-properties',
-          'transform-object-rest-spread'
-        ]
-      }
+      loader: 'babel-loader'
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
