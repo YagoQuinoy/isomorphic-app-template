@@ -1,37 +1,49 @@
-// React/Redux
-import React, { Component } from 'react'
+// Libs
+import React from 'react'
 import { Link } from 'react-router-dom'
 
+// Text
 import styles from './header.css'
 
+function renderNavigation() {
+  const items = [{
+    path: '/',
+    text: 'Home'
+  }, {
+    path: '/form',
+    text: 'Form'
+  }, {
+    path: '/other',
+    text: 'Other'
+  }]
+
+  const list = items.map(item => (
+    <li key={item.path} className={ styles.navItem }>
+      <Link className={ styles.navLink } to={ item.path }>
+        item.text
+      </Link>
+    </li>
+  ))
+
+  return (
+    <ul className={ styles.nav }>
+      { list }
+    </ul>
+  )
+}
+
 /**
- * Default root component. Shows a link to questions. It could ve a component.
+ * [Header description]
  */
-class Header extends Component {
-  render() {
-    return (
-      <header className={ styles.header }>
-        <h1>Isomorphic App Template</h1>
-        <ul className={ styles.navigation }>
-          <li>
-            <Link to={ '/' }>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to={ '/form' }>
-              Form
-            </Link>
-          </li>
-          <li>
-            <Link to={ '/other' }>
-              Other
-            </Link>
-          </li>
-        </ul>
-      </header>
-    )
-  }
+const Header = () => {
+  const navigation = renderNavigation()
+
+  return (
+    <header className={ styles.header }>
+      <h1>Isomorphic App Template</h1>
+      { navigation }
+    </header>
+  )
 }
 
 export default Header

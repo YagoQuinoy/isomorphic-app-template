@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+body > div,
+html {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  &:visited,
+  &:hover {
+    color: grey;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0
+}

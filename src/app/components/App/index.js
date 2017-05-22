@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // Styles
 import 'normalize.css'
+import './default.css'
 import styles from './app.css'
 
 // Componentes
