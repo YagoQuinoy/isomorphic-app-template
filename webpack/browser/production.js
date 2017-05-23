@@ -10,9 +10,7 @@ const appPath = path.resolve(__dirname, '../../src/app/index.js')
 const outputPath = path.resolve(__dirname, '../../assets/')
 
 /**
- * Webpack browser configuration. jQuery as vendor.
- * Avoid babelrc due to babel plugin 'css-modules-transform'
- * for css import at server side rendering
+ * Webpack browser production configuration.
  * @type {Object}
  */
 export default {
@@ -36,8 +34,7 @@ export default {
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        //resolve-url-loader may be chained before sass-loader if necessary
+        fallback: 'style-loader', //resolve-url-loader may be chained before sass-loader if necessary
         use: [{
           loader: 'css-loader',
           options: {

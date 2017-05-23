@@ -2,6 +2,7 @@
 import { resolve } from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 // Config
 import config from '../../config'
@@ -12,13 +13,11 @@ const outputPath = resolve(__dirname, '../../assets/')
 const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
 
 /**
- * Webpack browser configuration. jQuery as vendor.
- * Avoid babelrc due to babel plugin 'css-modules-transform'
- * for css import at server side rendering
+ * Webpack browser dev configuration.
  * @type {Object}
  */
-export default {
-  devtool: 'inline-source-map',
+ const webpackDevConfig = {
+  devtool: 'cheap-module-source-map',
   entry: {
     app: [
     'react-hot-loader/patch',
@@ -35,7 +34,10 @@ export default {
     appPath
     // the entry point of our app
   ],
-    vendor: ['react']
+    vendor: [
+      'axios',
+      'react'
+    ]
   },
   output: {
     path: outputPath,
@@ -85,3 +87,11 @@ export default {
     new webpack.HotModuleReplacementPlugin()
   ]
 }
+
+if(true) {
+  webpackDevConfig.plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'static'
+  }))
+}
+
+export default webpackDevConfig

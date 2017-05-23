@@ -1,7 +1,11 @@
 // Libs
 import path from 'path'
 
+
+
 /**
+ * For bundle server code. Production only.
+ *
  * Thanks Ambroos!
  * http://stackoverflow.com/questions/37369053/webpack-babel-config-for-both-server-and-client-javascript
  * @type {Object}

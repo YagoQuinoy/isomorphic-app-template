@@ -1,4 +1,4 @@
-import * as helloRouter from './hello.router';
+import * as helloRouter from './hello.router'
 
 /* NOTE: Import here more api controller routes */
 
@@ -7,7 +7,7 @@ import * as helloRouter from './hello.router';
  * @param  {Server} server
  */
 export function route(server) {
- helloRouter.route(server);
+ helloRouter.route(server)
 
  /* NOTE: Add here more api controller routes */
-};
+}
