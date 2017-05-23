@@ -81,4 +81,4 @@ send us a pull request.
 
 ## License
 
-Your Licensing Information goes here. Example: MIT/X11.
+MIT License.
