@@ -24,11 +24,11 @@ const serverConfig = (config.env === 'development') ? config.webpackServer : con
 
 const favicon = `${serverConfig.url}:${serverConfig.port}/assets/favicon.ico`
 const scripts = [`${serverConfig.url}:${serverConfig.port}/assets/app.bundle.js`]
-const styles = `${serverConfig.url}:${serverConfig.port}/assets/styles.css`
-// let styles = ''
-// if (config.env === 'production') {
-//   styles = `${serverConfig.url}:${serverConfig.port}/assets/styles.css`
-// }
+
+let styles = ''
+if (config.env === 'production') {
+  styles = `${serverConfig.url}:${serverConfig.port}/assets/styles.css`
+}
 
 /**
  * Server rendering a React application

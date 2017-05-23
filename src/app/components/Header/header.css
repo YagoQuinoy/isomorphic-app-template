@@ -16,7 +16,7 @@
     &:after {
       content: "";
       border-bottom-style: dotted;
-      border-bottom-width: 20px;
+      border-bottom-width: 10px;
       display: block;
       width: 100%;
     }
