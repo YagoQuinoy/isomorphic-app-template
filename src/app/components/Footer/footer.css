@@ -2,12 +2,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: darkslategrey;
   height: 50px;
-  & > a {
-    &:link,
-    &:visited {
-      color: white;
-    }
-  }
 }

@@ -1,24 +1,24 @@
 * {
   box-sizing: border-box;
+  font-size: 1rem;
+  @media (--phone) {
+    font-size: 0.9rem;
+  }
+  @media (--tablet) {
+    font-size: 1rem;
+  }
+  @media (--desktop) {
+    font-size: 1.1rem;
+  }
+  @media (--large-desktop) {
+    font-size: 1.2rem;
+  }
 }
 
 body,
 body > div,
 html {
   height: 100%;
-  font-size: 1rem;
-  @media (--phone) {
-    font-size: 1.1rem;
-  }
-  @media (--tablet) {
-    font-size: 1.2rem;
-  }
-  @media (--desktop) {
-    font-size: 1.3rem;
-  }
-  @media (--large-desktop) {
-    font-size: 1.4rem;
-  }
 }
 
 a {
