@@ -23,7 +23,10 @@ import routes from '../../app/routes'
 const serverConfig = (config.env === 'development') ? config.webpackServer : config.server
 
 const favicon = `${serverConfig.url}:${serverConfig.port}/assets/favicon.ico`
-const scripts = [`${serverConfig.url}:${serverConfig.port}/assets/app.bundle.js`]
+const scripts = [
+  `${serverConfig.url}:${serverConfig.port}/assets/app.bundle.js`,
+  `${serverConfig.url}:${serverConfig.port}/assets/vendor.js`
+]
 
 let styles = ''
 if (config.env === 'production') {
