@@ -2,13 +2,12 @@
 import { resolve } from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 // Config
 import config from '../../config'
 
 const appPath = resolve(__dirname, '../../src/app/index.js')
-const outputPath = resolve(__dirname, '../../assets/')
+const outputPath = resolve(__dirname, '../../public/')
 
 const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
 
@@ -16,41 +15,29 @@ const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
  * Webpack browser dev configuration.
  * @type {Object}
  */
- const webpackDevConfig = {
+const webpackDevConfig = {
   devtool: 'cheap-module-source-map',
   entry: {
     app: [
-    'react-hot-loader/patch',
-    // activate HMR for React
+      'react-hot-loader/patch',
+      // activate HMR for React
 
-    `webpack-dev-server/client?${baseUrl}`,
-    // bundle the client for webpack-dev-server
-    // and connect to the provided endpoint
+      `webpack-dev-server/client?${baseUrl}`,
+      // bundle the client for webpack-dev-server
+      // and connect to the provided endpoint
 
-    'webpack/hot/only-dev-server',
-    // bundle the client for hot reloading
-    // only- means to only hot reload for successful updates
+      'webpack/hot/only-dev-server',
+      // bundle the client for hot reloading
+      // only- means to only hot reload for successful updates
 
-    appPath
-    // the entry point of our app
-  ],
-    vendor: [
-      'axios',
-      'immutable',
-      'lodash',
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-dom',
-      'redux',
-      'redux-logger'
+      appPath
+      // the entry point of our app
     ]
   },
   output: {
     path: outputPath,
     filename: '[name].bundle.js',
-    publicPath: `${baseUrl}/assets/`
+    publicPath: `${baseUrl}/public/`
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -99,23 +86,8 @@ const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
         NODE_ENV: JSON.stringify(config.env)
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      chunks: ['vendor'],
-      filename: 'vendor.js',
-      minChunks: Infinity
-    }),
     new webpack.HotModuleReplacementPlugin()
-  ],
-  performance: {
-    hints: 'warning'
-  }
-}
-
-if (true) {
-  webpackDevConfig.plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static'
-  }))
+  ]
 }
 
 export default webpackDevConfig

@@ -22,16 +22,16 @@ import routes from '../../app/routes'
 // Assets paths
 const serverConfig = (config.env === 'development') ? config.webpackServer : config.server
 
-const favicon = `${serverConfig.url}:${serverConfig.port}/assets/favicon.ico`
-const scripts = [
-  `${serverConfig.url}:${serverConfig.port}/assets/app.bundle.js`,
-  `${serverConfig.url}:${serverConfig.port}/assets/vendor.js`
-]
+const favicon = `${serverConfig.url}:${serverConfig.port}/public/favicon.ico`
+const scripts = []
 
 let styles = ''
 if (config.env === 'production') {
-  styles = `${serverConfig.url}:${serverConfig.port}/assets/styles.css`
+  styles = `${serverConfig.url}:${serverConfig.port}/public/styles.css`
+  scripts.push(`${serverConfig.url}:${serverConfig.port}/public/vendor.bundle.js`) // NOTE: Do no forget load order. Vendors before app bundle!!
 }
+
+scripts.push(`${serverConfig.url}:${serverConfig.port}/public/app.bundle.js`)
 
 /**
  * Server rendering a React application
@@ -88,7 +88,7 @@ export function render(req, res, next) {
 
       // Render template
       const templatePath = path.resolve(`${__dirname}/templates/index.ejs`)
-      
+
       ejs.renderFile(templatePath, {
         html,
         favicon,

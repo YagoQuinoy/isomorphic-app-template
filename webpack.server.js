@@ -15,13 +15,13 @@ const logger = bunyan.createLogger({
 })
 
 new WebpackDevServer(webpack(browserConfig), {
-  publicPath: browserConfig.output.publicPath,
+  compress: true,
   headers: { 'Access-Control-Allow-Origin': '*' },
+  historyApiFallback: true,
   hot: true,
   inline: true,
-  historyApiFallback: true,
-  compress: true,
   noInfo: false,
+  publicPath: browserConfig.output.publicPath,
   stats: {
     colors: true,
     hash: true,

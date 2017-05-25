@@ -1,8 +1,6 @@
 # App
 dist
-static/app.bundle.js
-static/dev.bundle.js
-static/vendor.js
+public
 
 # Logs
 logs

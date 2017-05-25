@@ -16,7 +16,7 @@ export function init(server) {
   apiRoute.route(server)
 
   const staticPath = path.resolve(`${__dirname}/../../../`)
-  server.get(/\/assets\/?.*/, restify.serveStatic({
+  server.get(/\/public\/?.*/, restify.serveStatic({
     directory: staticPath
   }))
 

@@ -7,6 +7,8 @@ import 'normalize.css'
 import './default.css'
 import styles from './app.css'
 
+import 'favicon.ico'
+
 // Componentes
 import Header from '../Header'
 import Footer from '../Footer'

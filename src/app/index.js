@@ -1,6 +1,5 @@
 // Libs
 import _ from 'lodash'
-import 'babel-polyfill' // NOTE: Hace falta?
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
