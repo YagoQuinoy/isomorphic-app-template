@@ -11,7 +11,11 @@
     "server": {
       "plugins": [
         ["css-modules-transform", {
-            "generateScopedName": "[name]__[local]___[hash:base64:5]"
+          "generateScopedName": "[name]__[local]___[hash:base64:5]"
+        }],
+        ["transform-assets", {
+          "extensions": ["jpg"],
+          "name": "public/img/[name].[sha512:hash:base64:7].[ext]",
         }]
       ]
     }

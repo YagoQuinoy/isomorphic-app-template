@@ -76,8 +76,21 @@ const webpackDevConfig = {
       }]
     }, {
       test: /\.(png|jpg)$/,
-      loader: 'file-loader?name=[name].[ext]&outputPath=img/'
-    }]
+      loader: 'file-loader',
+      query: {
+        name: 'img/[name].[sha512:hash:base64:7].[ext]',
+        useRelativePath: true
+      }
+    }
+    // , {
+    //   test: /favicon\.ico$/,
+    //   loader: 'url-loader',
+    //   query: {
+    //     limit: 1,
+    //     name: '[name].[ext]'
+    //   }
+    // }
+  ]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),

@@ -62,15 +62,14 @@ const webpackProConfig = {
     }, {
       test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
       loader: 'file-loader?name=[name].[ext]&outputPath=img/'
-    },{
+    }, {
       test: /favicon\.ico$/,
       loader: 'url-loader',
       query: {
         limit: 1,
         name: '[name].[ext]'
       }
-    }
-  ]
+    }]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
@@ -93,7 +92,7 @@ const webpackProConfig = {
   }
 }
 
-if (true) {
+if(true) {
   webpackProConfig.plugins.push(new BundleAnalyzerPlugin({
     analyzerMode: 'static'
   }))

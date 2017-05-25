@@ -1,13 +1,21 @@
-// React/Redux
+// Libs
 import React, { Component } from 'react'
 
+// Styles
 import styles from './home.css'
+
+// Images
+import image1 from './images-1.jpg'
 
 /**
  * Default root component. Shows a link to questions. It could ve a component.
  */
 class Home extends Component {
   render() {
+    console.log('---------------------------------------------')
+    console.log('image: ' + image1)
+    console.log('---------------------------------------------')
+
     const paragraph1 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit tortor non nulla molestie, eget molestie quam tincidunt. Nullam consequat luctus vehicula. Mauris quis nisl massa. Praesent vitae tellus dignissim, imperdiet magna quis, convallis turpis. Phasellus ultrices at tellus pulvinar pellentesque. Nam iaculis bibendum fermentum. Proin commodo mattis odio, vitae auctor sem ullamcorper nec. Praesent vel dui ac odio congue lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque feugiat magna eu eros elementum, non pharetra quam faucibus. Vivamus vitae viverra tortor, in tempus diam. Aenean sagittis lacus vel interdum vestibulum.'
 
     const paragraph2 = 'Fusce maximus nunc justo, eu vehicula neque ornare id. Quisque lacinia euismod massa, ut elementum nisl gravida pellentesque. Sed lacinia enim vitae ex tincidunt aliquet. Donec mi ipsum, auctor vitae hendrerit et, iaculis et lectus. Duis eget vestibulum ligula. Cras elementum purus sit amet est sagittis, nec euismod justo efficitur. Pellentesque laoreet lacinia feugiat. Praesent tristique malesuada velit eget porta. Donec ut ex ac purus porta dapibus. Suspendisse vel molestie nulla. Etiam fringilla turpis vel feugiat hendrerit. Vestibulum accumsan lorem in lacus tempus accumsan.'
@@ -25,6 +33,7 @@ class Home extends Component {
         <p>{ paragraph3 }</p>
         <p>{ paragraph4 }</p>
         <p>{ paragraph5 }</p>
+        <img src={ image1 } />
       </div>
     )
   }
