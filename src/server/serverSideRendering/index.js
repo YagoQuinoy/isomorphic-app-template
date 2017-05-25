@@ -88,6 +88,7 @@ export function render(req, res, next) {
 
       // Render template
       const templatePath = path.resolve(`${__dirname}/templates/index.ejs`)
+      
       ejs.renderFile(templatePath, {
         html,
         favicon,

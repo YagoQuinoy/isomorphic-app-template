@@ -1,6 +1,4 @@
 // Libs
-import { merge } from 'lodash'
-
 const config = {
   env: process.env.NODE_ENV || 'production',
   server: {
@@ -9,5 +7,5 @@ const config = {
   }
 }
 
-const envConfig = require(`./${config.env}.js`).default
-export default merge({}, config, envConfig || {})
+const envConfig = require(`./${config.env}.js`).default || {}
+export default Object.assign({}, config, envConfig)

@@ -21,7 +21,7 @@ new WebpackDevServer(webpack(browserConfig), {
   inline: true,
   historyApiFallback: true,
   compress: true,
-  noInfo: true,
+  noInfo: false,
   stats: {
     colors: true,
     hash: true,

@@ -2,6 +2,7 @@
 import path from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 // Config
 import config from '../../config'
@@ -13,7 +14,7 @@ const outputPath = path.resolve(__dirname, '../../assets/')
  * Webpack browser production configuration.
  * @type {Object}
  */
-export default {
+const webpackProConfig = {
   entry: {
     app: appPath,
     vendor: ['react']
@@ -62,10 +63,23 @@ export default {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       chunks: ['vendor'],
-      filename: 'vendor.js'
+      filename: 'vendor.js',
+      minChunks: Infinity
     })
-  ]
+    // new webpack.optimize.UglifyJsPlugin({})
+  ],
+  performance: {
+    hints: 'warning'
+  }
 }
+
+if (true) {
+  webpackProConfig.plugins.push(new BundleAnalyzerPlugin({
+    analyzerMode: 'static'
+  }))
+}
+
+export default webpackProConfig
 
 // // Libs
 // import path from 'path'

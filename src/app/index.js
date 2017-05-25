@@ -48,7 +48,6 @@ function render(component) {
 function renderDev(Component, store) {
   // AppContainer is a necessary wrapper component for HMR
   const AppContainer = require('react-hot-loader').AppContainer
-
   const rendered = renderAppComponent(Component, store)
 
   render (
@@ -58,13 +57,7 @@ function renderDev(Component, store) {
   )
 }
 
-/**
- * Component it's used
- * @param  {[type]} Component
- * @param  {[type]} store
- * @return {[type]}
- */
-
+// Init
 const initialState = {}
 if (window.__INITIAL_STATE__) {
   try {
@@ -76,9 +69,6 @@ if (window.__INITIAL_STATE__) {
 }
 
 const store = configureStore(initialState)
-
-
-console.log(config.env)
 
 if(config.env === 'development') {
   renderDev(App, store)
