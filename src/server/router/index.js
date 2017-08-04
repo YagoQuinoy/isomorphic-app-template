@@ -22,6 +22,5 @@ export function init(server) {
 
   server.get(/.*/, (req, res, next) => {
     render(req, res, next)
-
   })
 }

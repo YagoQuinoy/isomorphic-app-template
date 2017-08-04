@@ -7,9 +7,6 @@ import config from '../../../config'
 // Api middleware
 import apiMiddleware from '../middleware/api'
 
-// Models
-import App from '../models/App'
-
 // Reducers
 import rootReducer from '../reducers'
 
@@ -22,7 +19,7 @@ if (config.env === 'development' && process.env.BROWSER) {
 
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 
-let store // TODO: Crear un factory o una class
+let store
 
 /**
  * Creates a redux store with middleware
@@ -34,8 +31,7 @@ export default function configureStore(initialState) {
     return store
   }
 
-  const state = App.getImmutable(initialState)
-  store = createStoreWithMiddleware(rootReducer, state)
+  store = createStoreWithMiddleware(rootReducer, initialState)
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
@@ -43,6 +39,7 @@ export default function configureStore(initialState) {
       store.replaceReducer(nextRootReducer)
     })
   }
+
 
   return store
 }

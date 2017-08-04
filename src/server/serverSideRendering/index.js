@@ -20,18 +20,18 @@ import config from '../../../config'
 import routes from '../../app/routes'
 
 // Assets paths
-const serverConfig = (config.env === 'development') ? config.webpackServer : config.server
+const { url, port } = (config.env === 'development') ? config.webpackServer : config.server
 
-const favicon = `${serverConfig.url}:${serverConfig.port}/public/favicon.ico`
+const favicon = `${url}:${port}/public/favicon.ico`
 const scripts = []
 
 let styles = ''
 if (config.env === 'production') {
-  styles = `${serverConfig.url}:${serverConfig.port}/public/styles.css`
-  scripts.push(`${serverConfig.url}:${serverConfig.port}/public/vendor.bundle.js`) // NOTE: Do no forget load order. Vendors before app bundle!!
+  styles = `${url}:${port}/public/styles.css`
+  scripts.push(`${url}:${port}/public/vendor.bundle.js`) // NOTE: Do no forget load order. Vendors before app bundle!!
 }
 
-scripts.push(`${serverConfig.url}:${serverConfig.port}/public/app.bundle.js`)
+scripts.push(`${url}:${port}/public/app.bundle.js`)
 
 /**
  * Server rendering a React application
@@ -40,15 +40,17 @@ scripts.push(`${serverConfig.url}:${serverConfig.port}/public/app.bundle.js`)
  * @param  {Function} next
  */
 export function render(req, res, next) {
-  // Create Store
+
+  // Create Store with initial state
   const store = configureStore({})
 
   // Load initial state
   const promises = []
+
   routes.some(route => {
     const match = matchPath(req.path(), route)
 
-    const {needs} = route.component // NOTE: Contemplar needs como array?
+    const {needs} = route.component
 
     if (match && needs) {
       needs.forEach((need) => {
@@ -97,8 +99,6 @@ export function render(req, res, next) {
         initialState
       }, (err, rendered) => {
         if(err) {
-          // TODO: Captura bien este horror?
-          console.log(err)
           next(err)
           return
         }
@@ -107,7 +107,6 @@ export function render(req, res, next) {
         next()
       })
   }).catch((err) => {
-    // TODO: Gestionar este horror
     console.log(err)
     next(err)
   })

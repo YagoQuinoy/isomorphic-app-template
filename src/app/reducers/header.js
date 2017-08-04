@@ -1,18 +1,16 @@
-import Header from '../models/Header'
-
 /**
  * Questions reducers
  * @param  {Object} [state=defaultState] Solo tiene acceso a header y a info
  * @param  {Object} action
  * @return {Object}
  */
-function headerReducer(state, action) {
+function headerReducer(state = {}, action) {
   switch(action.type) {
     case 'GET_HEADER_REQUEST':
       return state
 
     case 'GET_HEADER':
-      return state.set('header', Header.getImmutable({ model: action.response }))
+      return action.response
 
     case 'GET_HEADER_FAILURE':
       return state

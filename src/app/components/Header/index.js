@@ -9,18 +9,12 @@ function renderNavigation() {
   const items = [{
     path: '/',
     text: 'Home'
-  }, {
-    path: '/form',
-    text: 'Form'
-  }, {
-    path: '/other',
-    text: 'Other'
   }]
 
   const list = items.map(item => (
     <li key={item.path} className={ styles.navItem }>
       <Link className={ styles.navLink } to={ item.path }>
-        item.text
+        { item.text }
       </Link>
     </li>
   ))

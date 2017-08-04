@@ -8,10 +8,10 @@ import config from '../../../config'
  * Load all questions from api
  * @return {Object}
  */
-export function loadHello(params={}) {
+export function getArticles() {
   return {
-    type: 'LOADED_HELLO',
-    promise: request.get(`${config.server.url}:${config.server.port}/api/hello/${params.name}`)
+    type: 'GET_ARTICLES',
+    promise: request.get(`${config.server.url}:${config.server.port}/api/articles`)
       .then(res => res.data)
   }
 }

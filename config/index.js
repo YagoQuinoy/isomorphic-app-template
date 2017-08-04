@@ -3,7 +3,7 @@ const config = {
   env: process.env.NODE_ENV || 'production',
   server: {
     url: process.env.SERVER_URL || 'http://localhost',
-    port: process.env.SERVER_PORT || 3000
+    port: process.env.SERVER_PORT || 5000
   }
 }
 

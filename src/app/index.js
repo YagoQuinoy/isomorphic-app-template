@@ -14,35 +14,35 @@ import config from '../../config'
 import configureStore from './store/configureStore'
 
 /**
- * [renderAppComponent description]
- * @param  {[type]} Component
- * @param  {[type]} store
- * @return {[type]}
+ * Render AppComponent
+ * @param  {Component} AppComponent
+ * @param  {Store} store
+ * @return {Component}
  */
-function renderAppComponent(Component, store) {
+function renderAppComponent(AppComponent, store) {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Component />
+        <AppComponent />
       </Provider>
     </BrowserRouter>
   )
 }
 
 /**
- * [render description]
- * @param  {[type]} component
- * @return {[type]}
+ * Render component and attach it to the DOM
+ * @param  {Component} component
+ * @return {undefined}
  */
 function render(component) {
   ReactDOM.render((component), document.getElementById('root'))
 }
 
 /**
- * [renderDev description]
- * @param  {[type]} Component
- * @param  {[type]} store
- * @return {[type]}
+ * Render App Component for development
+ * @param  {Component} Component
+ * @param  {Store} store
+ * @return {Component}
  */
 function renderDev(Component, store) {
   // AppContainer is a necessary wrapper component for HMR
