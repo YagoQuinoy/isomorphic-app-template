@@ -1,6 +1,7 @@
 // Libs
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import * as actions from '../../actions/articles'
 
@@ -16,14 +17,25 @@ import styles from './home.css'
 class Home extends Component {
   static needs = [actions.getArticles]
 
-  // componentDidMount() {}
+  componentDidMount() {
+    if (this.props.loaded) {
+      this.props.getArticles()
+    }
+  }
 
   render() {
     const { articles } = this.props
 
+    const items = articles.map((article, index) => (
+      <section key={`_${index}`}>
+        <h5><Link to={`/articles/${index}`}>{article.title}</Link></h5>
+        <p>{article.content}</p>
+      </section>
+    ))
+
     return (
       <div className={ styles.home }>
-        { articles.map((article, index) => (<p key={`_${index}`}>{article}</p>)) }
+        { items }
       </div>
     )
   }
@@ -31,6 +43,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
+    loaded: state.app.loaded,
     articles: state.articles
   }
 }
@@ -38,7 +51,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getArticles: () => {
-      dispatch(actions.getArticles)
+      dispatch(actions.getArticles())
     }
   }
 }

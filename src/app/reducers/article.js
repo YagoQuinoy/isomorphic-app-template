@@ -4,15 +4,15 @@
  * @param  {Object} action
  * @return {Object}
  */
-function articlesReducer(state = [], action) {
+function articlesReducer(state = {}, action) {
   switch(action.type) {
-    case 'GET_ARTICLES_REQUEST':
+    case 'GET_ARTICLE_REQUEST':
       return state
 
-    case 'GET_ARTICLES':
+    case 'GET_ARTICLE':
       return action.response
 
-    case 'GET_ARTICLES_FAILURE':
+    case 'GET_ARTICLE_FAILURE':
       return state
 
     default:

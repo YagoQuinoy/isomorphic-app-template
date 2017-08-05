@@ -54,7 +54,7 @@ export function render(req, res, next) {
 
     if (match && needs) {
       needs.forEach((need) => {
-        const action = need()
+        const action = need(match.params)
         promises.push(store.dispatch(action))
       })
     }

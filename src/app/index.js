@@ -23,7 +23,7 @@ function renderAppComponent(AppComponent, store) {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppComponent />
+        <AppComponent dispatch={store.dispatch}/>
       </Provider>
     </BrowserRouter>
   )
@@ -57,11 +57,11 @@ function renderDev(Component, store) {
 }
 
 // Init
-const initialState = {}
+let initialState = {}
+
 if (window.__INITIAL_STATE__) {
   try {
-    const plain = JSON.parse(unescape(window.__INITIAL_STATE__))
-    _.each(plain, (val, key) => initialState[key] = val)
+    initialState = JSON.parse(unescape(window.__INITIAL_STATE__))
   } catch (e) {
     // console.error(e) // NOTE: Algo habrá que hacer aquí
   }

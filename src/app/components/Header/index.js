@@ -5,11 +5,12 @@ import { Link } from 'react-router-dom'
 // Text
 import styles from './header.css'
 
+const items = [{
+  path: '/',
+  text: 'Home'
+}]
+
 function renderNavigation() {
-  const items = [{
-    path: '/',
-    text: 'Home'
-  }]
 
   const list = items.map(item => (
     <li key={item.path} className={ styles.navItem }>

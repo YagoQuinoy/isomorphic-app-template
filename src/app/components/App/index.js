@@ -1,5 +1,6 @@
 // Libs
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
 // Styles
@@ -13,6 +14,9 @@ import Footer from '../Footer'
 
 // Routes
 import routes from '../../routes'
+
+// Actions
+import * as actions from '../../actions/app'
 
 const LayoutRoute = ({component: Component, ...rest}) => {
   // NOTE: Here we can chose layout by component
@@ -36,6 +40,11 @@ const LayoutRoute = ({component: Component, ...rest}) => {
  * Application component. Just a wrapper.
  */
 class App extends Component {
+  componentDidMount() {
+    // NOTE: Dont know why redux connect fails, so...
+    this.props.dispatch(actions.appLoaded())
+  }
+
   render() {
     return (
       <Switch>

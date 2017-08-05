@@ -6,4 +6,5 @@ import * as ArticlesController from '../../api/controllers/articles'
  */
 export function route(server) {
   server.get('/api/articles', ArticlesController.getArticles)
+  server.get('/api/articles/:id', ArticlesController.getArticle)
 }

@@ -2,12 +2,14 @@
 import { combineReducers } from  'redux'
 
 // Reducers
-import headerReducer from './header'
+import appReducer from './app'
 import articlesReducer from './articles'
+import articleReducer from './article'
 
 const rootReducer = combineReducers({
-  header: headerReducer,
-  articles: articlesReducer
+  app: appReducer,
+  articles: articlesReducer,
+  article: articleReducer
 })
 
 export default rootReducer
