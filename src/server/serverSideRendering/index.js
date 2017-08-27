@@ -10,8 +10,8 @@ import { matchPath } from 'react-router-dom'
 import configureStore from '../../app/store/configureStore'
 import { StaticRouter } from 'react-router'
 
-// Components
-import App from '../../app/components/App'
+// Containers
+import App from '../../app/containers/App'
 
 // Config
 import config from '../../../config'

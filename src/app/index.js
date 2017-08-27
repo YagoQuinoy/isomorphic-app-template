@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 // Component
-import App from './components/App'
+import App from './containers/App'
 
 import config from '../../config'
 
@@ -74,7 +74,7 @@ if(config.env === 'development') {
 
   // Hot Module Replacement API
   if (module.hot) {
-    module.hot.accept('./components/App', () => {
+    module.hot.accept('./containers/App', () => {
       renderDev(App, store)
     })
   }

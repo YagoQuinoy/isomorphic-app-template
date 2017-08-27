@@ -8,6 +8,9 @@ import styles from './header.css'
 const items = [{
   path: '/',
   text: 'Home'
+}, {
+  path: '/article/new',
+  text: 'New article'
 }]
 
 function renderNavigation() {

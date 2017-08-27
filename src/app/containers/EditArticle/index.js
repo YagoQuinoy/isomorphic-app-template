@@ -3,15 +3,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import ArticleForm from '../../components/ArticleForm'
+
 import * as actions from '../../actions/articles'
 
 // Styles
-import styles from './article.css'
+import styles from './editArticle.css'
 
 /**
  * Default root component. Shows a link to questions. It could ve a component.
  */
-class Article extends Component {
+class EditArticle extends Component {
   static needs = [actions.getArticle]
 
   componentDidMount() {
@@ -25,12 +27,10 @@ class Article extends Component {
     const { match, article } = this.props
 
     return (
-      <div className={ styles.article }>
-        <section>
-          <h5><Link to={`/articles/${match.params.id}`}>{article.title}</Link></h5>
-          <p>{article.content}</p>
-        </section>
-      </div>
+      <section className={styles.editArticle}>
+        <h5><Link to={`/articles/${match.params.id}`}>Edit {article.title}</Link></h5>
+        <ArticleForm article={article} />
+      </section>
     )
   }
 }
@@ -44,15 +44,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getArticle: (params) => {
-      dispatch(actions.getArticle(params))
-    }
+    getArticle: (params) => dispatch(actions.getArticle(params))
   }
 }
 
-const ConnectedArticle = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Article)
-
-export default ConnectedArticle
+)(EditArticle)
