@@ -9,7 +9,7 @@ const items = [{
   path: '/',
   text: 'Home'
 }, {
-  path: '/article/new',
+  path: '/articles/new',
   text: 'New article'
 }]
 

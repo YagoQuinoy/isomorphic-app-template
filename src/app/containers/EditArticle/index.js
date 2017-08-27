@@ -16,11 +16,21 @@ import styles from './editArticle.css'
 class EditArticle extends Component {
   static needs = [actions.getArticle]
 
+  constructor(props) {
+    super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
   componentDidMount() {
     if (this.props.loaded) {
       const { match, getArticle } = this.props
       getArticle(match.params)
     }
+  }
+
+  handleSubmit(article) {
+    console.log('edit', article)
   }
 
   render() {
@@ -29,7 +39,10 @@ class EditArticle extends Component {
     return (
       <section className={styles.editArticle}>
         <h5><Link to={`/articles/${match.params.id}`}>Edit {article.title}</Link></h5>
-        <ArticleForm article={article} />
+        <ArticleForm
+          article={article}
+          onSubmit={this.handleSubmit}
+        />
       </section>
     )
   }

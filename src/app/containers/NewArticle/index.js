@@ -13,11 +13,21 @@ import styles from './newArticle.css'
  * Default root component. Shows a link to questions. It could ve a component.
  */
 class NewArticle extends Component {
+  constructor(props) {
+    super(props)
+
+    this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(article) {
+    console.log('new', article)
+  }
+
   render() {
     return (
       <section className={styles.newArticle}>
         <h5>New article</h5>
-        <ArticleForm />
+        <ArticleForm onSubmit={this.handleSubmit} />
       </section>
     )
   }
@@ -29,4 +39,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(() => {}, mapDispatchToProps)(NewArticle)
+export default connect(() => ({}), mapDispatchToProps)(NewArticle)
