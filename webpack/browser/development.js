@@ -1,12 +1,14 @@
 // Libs
 import { resolve } from 'path'
 import webpack from 'webpack'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 // Config
 import config from '../../config'
 
-const appPath = resolve(__dirname, '../../src/app/')
-const outputPath = resolve(__dirname, '../../public/')
+const rootPath = resolve(__dirname, '../../')
+const appPath = `${rootPath}/src/app/`
+const outputPath = `${rootPath}/public/`
 
 const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
 
@@ -40,67 +42,60 @@ const webpackDevConfig = {
   },
   module: {
     rules: [{
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          babelrc: false, // Can't set these in baberc file without provoking webpack.server.js break due to modules: false
-          presets: [
-            ['es2015', { 'modules': false }],
-            'react'
-          ],
-          plugins: [
-            'transform-class-properties',
-            'transform-object-rest-spread',
-            'react-hot-loader/babel'
-          ]
-        }
-      }, {
-        test: /\.css$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            sourceMap: true,
-            modules: true, // Enable CSS modules
-            importLoaders: 1, // Number of loaders before css-loaders
-            localIdentName: '[name]__[local]___[hash:base64:5]',
-            alias: {
-              'Assets': `${appPath}/assets/`
-            }
-          }
-        }, {
-          loader: 'postcss-loader'
-        }]
-      }, {
-        test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
-        loader: 'file-loader',
-        query: {
-          name: '[name].[sha512:hash:base64:7].[ext]',
-          outputPath: 'img/',
-          useRelativePath: true
-        }
-      }, {
-        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
-        loader: 'file-loader',
-        query: {
-          name: '[name].[ext]',
-          outputPath: 'fonts/'
-          // useRelativePath: true
-        }
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      options: {
+        babelrc: false, // Can't set these in baberc file without provoking webpack.server.js break due to modules: false
+        presets: [
+          ['es2015', { 'modules': false }],
+          'react'
+        ],
+        plugins: [
+          'transform-class-properties',
+          'transform-object-rest-spread',
+          'react-hot-loader/babel'
+        ]
       }
-      // , {
-      //   test: /\.(png|jpg)$/,
-      //   loader: 'file-loader',
-      //   query: {
-      //     name: 'img/[name].[sha512:hash:base64:7].[ext]',
-      //     useRelativePath: true
-      //   }
-      // }
-    ]
+    }, {
+      test: /\.css$/,
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          sourceMap: true,
+          modules: true, // Enable CSS modules
+          importLoaders: 1, // Number of loaders before css-loaders
+          localIdentName: '[name]__[local]___[hash:base64:5]',
+          alias: {
+            Assets: `${rootPath}/assets/`
+          }
+        }
+      }, {
+        loader: 'postcss-loader'
+      }]
+    }, {
+      test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'img/'
+      }
+    }, {
+      test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'fonts/'
+      }
+    }]
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: `${rootPath}/assets/favicon.ico`,
+      to: `${rootPath}/public`
+    }]),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(config.env)

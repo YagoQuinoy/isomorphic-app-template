@@ -1,0 +1,1 @@
+// Use hash with webpack in production: https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95

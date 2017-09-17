@@ -1,7 +1,7 @@
 // Libs
-import path from 'path'
+import { resolve } from 'path'
 
-
+const rootPath = resolve(__dirname, '../../')
 
 /**
  * For bundle server code. Production only.
@@ -12,7 +12,7 @@ import path from 'path'
  */
 export default {
   entry: {
-    api: path.resolve(__dirname, '../../src/server/index.js')
+    api: `${rootPath}/src/server/index.js`
   },
   target: 'node',
   node: {
@@ -22,20 +22,29 @@ export default {
     extensions: ['.js', '.jsx']
   },
   output: {
-    path: path.resolve(__dirname, '../../dist/'),
+    path: `${rootPath}/dist/`,
     filename: '[name].bundle.js',
     libraryTarget: 'commonjs'
   },
-  externals: [/^(?!\.|\/).+/i],
+  externals: [/^(?!\.|\/).+/i], // Bundle only relative paths
   module: {
     rules: [{
       test: /\.jsx?$/,
       loader: 'babel-loader'
     }, {
-      test: /\.(jpg|png|svg)$/,
+      test: /\.(png|jpg)$/,
       loader: 'file-loader',
       options: {
-        name: '[path][name].[hash].[ext]'
+        name: '[name].[sha512:hash:base64:7].[ext]',
+        outputPath: 'img/',
+        emitFile: false
+      }
+    }, {
+      test: /favicon.ico$/,
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        emitFile: false
       }
     }]
   }

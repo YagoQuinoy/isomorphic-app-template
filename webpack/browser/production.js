@@ -1,14 +1,16 @@
 // Libs
-import path from 'path'
+import { resolve } from 'path'
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
 
 // Config
 import config from '../../config'
 
-const appPath = path.resolve(__dirname, '../../src/app/')
-const outputPath = path.resolve(__dirname, '../../public/')
+const rootPath = resolve(__dirname, '../../')
+const appPath = resolve(__dirname, '../../src/app/')
+const outputPath = resolve(__dirname, '../../public/')
 
 /**
  * Webpack browser production configuration.
@@ -55,7 +57,7 @@ const webpackProConfig = {
             importLoaders: 1, // Number of loaders before css-loaders
             localIdentName: '[name]__[local]___[hash:base64:5]',
             alias: {
-              'Assets': `${appPath}/assets/`
+              'Assets': `${rootPath}/assets/`
             }
           }
         }, {
@@ -65,28 +67,25 @@ const webpackProConfig = {
     }, {
       test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
       loader: 'file-loader?name=&outputPath=img/&useRelativePath=true',
-      query: {
+      options: {
         name: '[name].[sha512:hash:base64:7].[ext]',
-        outputPath: 'img'
+        outputPath: 'img/'
       }
     }, {
       test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
       loader: 'file-loader',
-      query: {
-        name: '[name].[sha512:hash:base64:7].[ext]',
-        outputPath: 'fonts'
-      }
-    }, {
-      test: /favicon\.ico$/,
-      loader: 'url-loader',
-      query: {
-        limit: 1,
-        name: '[name].[ext]'
+      options: {
+        name: '[name].[ext]',
+        outputPath: 'fonts/'
       }
     }]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
+    new CopyWebpackPlugin([{
+      from: `${rootPath}/assets/favicon.ico`,
+      to: `${rootPath}/public`
+    }]),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
