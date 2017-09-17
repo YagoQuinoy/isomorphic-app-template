@@ -1,0 +1,11 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+
+}
+
+.icon-search:before {
+  content: "\e986";
+}

@@ -1,15 +1,16 @@
 // Libs
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
 // Styles
 import 'normalize.css'
 import './default.css'
+import './fonts.css'
 import styles from './app.css'
 
 // Componentes
 import Header from '../Header'
+import Navigation from '../Navigation'
 import Footer from '../Footer'
 
 // Routes
@@ -25,6 +26,7 @@ const LayoutRoute = ({component: Component, ...rest}) => {
     <div className={ styles.app }>
       <Header/>
       <div className={ styles.container }>
+        <Navigation />
         <Component {...props}/>
       </div>
       <Footer />

@@ -1,12 +1,11 @@
 // Libs
 import { resolve } from 'path'
 import webpack from 'webpack'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 // Config
 import config from '../../config'
 
-const appPath = resolve(__dirname, '../../src/app/index.js')
+const appPath = resolve(__dirname, '../../src/app/')
 const outputPath = resolve(__dirname, '../../public/')
 
 const baseUrl = `${config.webpackServer.url}:${config.webpackServer.port}`
@@ -21,16 +20,13 @@ const webpackDevConfig = {
     app: [
       'react-hot-loader/patch',
       // activate HMR for React
-
       `webpack-dev-server/client?${baseUrl}`,
       // bundle the client for webpack-dev-server
       // and connect to the provided endpoint
-
       'webpack/hot/only-dev-server',
       // bundle the client for hot reloading
       // only- means to only hot reload for successful updates
-
-      appPath
+      `${appPath}/index.js`
       // the entry point of our app
     ]
   },
@@ -44,56 +40,67 @@ const webpackDevConfig = {
   },
   module: {
     rules: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      options: {
-        babelrc: false, // Can't set these in baberc file without provoking webpack.server.js break due to modules: false
-        presets: [
-          ['es2015', { 'modules': false }],
-          'react'
-        ],
-        plugins: [
-          'transform-class-properties',
-          'transform-object-rest-spread',
-          'react-hot-loader/babel'
-        ]
-      }
-    }, {
-      test: /\.css$/,
-      use: [{
-        loader: 'style-loader'
-      }, {
-        loader: 'css-loader',
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
         options: {
-          sourceMap: true,
-          modules: true, // Enable CSS modules
-          importLoaders: 1, // Number of loaders before css-loaders
-          localIdentName: '[name]__[local]___[hash:base64:5]'
+          babelrc: false, // Can't set these in baberc file without provoking webpack.server.js break due to modules: false
+          presets: [
+            ['es2015', { 'modules': false }],
+            'react'
+          ],
+          plugins: [
+            'transform-class-properties',
+            'transform-object-rest-spread',
+            'react-hot-loader/babel'
+          ]
         }
       }, {
-        loader: 'postcss-loader'
-      }]
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'file-loader',
-      query: {
-        name: 'img/[name].[sha512:hash:base64:7].[ext]',
-        useRelativePath: true
+        test: /\.css$/,
+        use: [{
+          loader: 'style-loader'
+        }, {
+          loader: 'css-loader',
+          options: {
+            sourceMap: true,
+            modules: true, // Enable CSS modules
+            importLoaders: 1, // Number of loaders before css-loaders
+            localIdentName: '[name]__[local]___[hash:base64:5]',
+            alias: {
+              'Assets': `${appPath}/assets/`
+            }
+          }
+        }, {
+          loader: 'postcss-loader'
+        }]
+      }, {
+        test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
+        loader: 'file-loader',
+        query: {
+          name: '[name].[sha512:hash:base64:7].[ext]',
+          outputPath: 'img/',
+          useRelativePath: true
+        }
+      }, {
+        test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+        loader: 'file-loader',
+        query: {
+          name: '[name].[ext]',
+          outputPath: 'fonts/'
+          // useRelativePath: true
+        }
       }
-    }
-    // , {
-    //   test: /favicon\.ico$/,
-    //   loader: 'url-loader',
-    //   query: {
-    //     limit: 1,
-    //     name: '[name].[ext]'
-    //   }
-    // }
-  ]
+      // , {
+      //   test: /\.(png|jpg)$/,
+      //   loader: 'file-loader',
+      //   query: {
+      //     name: 'img/[name].[sha512:hash:base64:7].[ext]',
+      //     useRelativePath: true
+      //   }
+      // }
+    ]
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(config.env)

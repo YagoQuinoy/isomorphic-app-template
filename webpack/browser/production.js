@@ -7,7 +7,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 // Config
 import config from '../../config'
 
-const appPath = path.resolve(__dirname, '../../src/app/index.js')
+const appPath = path.resolve(__dirname, '../../src/app/')
 const outputPath = path.resolve(__dirname, '../../public/')
 
 /**
@@ -28,7 +28,7 @@ const webpackProConfig = {
       'redux',
       'redux-logger'
     ],
-    app: appPath
+    app: `${appPath}/index.js`
   },
   output: {
     path: outputPath,
@@ -53,7 +53,10 @@ const webpackProConfig = {
             sourceMap: true,
             modules: true, // Enable CSS modules
             importLoaders: 1, // Number of loaders before css-loaders
-            localIdentName: '[name]__[local]___[hash:base64:5]'
+            localIdentName: '[name]__[local]___[hash:base64:5]',
+            alias: {
+              'Assets': `${appPath}/assets/`
+            }
           }
         }, {
           loader: 'postcss-loader'
@@ -61,7 +64,18 @@ const webpackProConfig = {
       })
     }, {
       test: /\.(png|jpg)$/, // TODO: Revisar tema imágenes
-      loader: 'file-loader?name=[name].[ext]&outputPath=img/'
+      loader: 'file-loader?name=&outputPath=img/&useRelativePath=true',
+      query: {
+        name: '[name].[sha512:hash:base64:7].[ext]',
+        outputPath: 'img'
+      }
+    }, {
+      test: /\.(eot|woff|woff2|svg|ttf)([\?]?.*)$/,
+      loader: 'file-loader',
+      query: {
+        name: '[name].[sha512:hash:base64:7].[ext]',
+        outputPath: 'fonts'
+      }
     }, {
       test: /favicon\.ico$/,
       loader: 'url-loader',
@@ -94,7 +108,7 @@ const webpackProConfig = {
 
 if(true) {
   webpackProConfig.plugins.push(new BundleAnalyzerPlugin({
-    analyzerMode: 'static'
+    analyzerMode: 'disabled'
   }))
 }
 
