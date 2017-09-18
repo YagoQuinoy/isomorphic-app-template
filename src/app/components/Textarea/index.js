@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Textarea = ({label, name, value, onChange}) => {(
+const Textarea = ({label, name, value, onChange}) => (
   <label>
     {label}
     <textarea
@@ -9,6 +9,6 @@ const Textarea = ({label, name, value, onChange}) => {(
       onChange={onChange}
     />
   </label>
-)}
+)
 
 export default Textarea
