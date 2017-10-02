@@ -15,17 +15,6 @@ const articles = [{
   content: 'Pellentesque vitae metus ac dui facilisis vestibulum. Vivamus lacus lectus, vulputate finibus massa at, posuere elementum ipsum. Nullam facilisis nunc quis metus commodo, lobortis suscipit purus imperdiet. Phasellus fermentum, quam et suscipit malesuada, elit diam blandit dui, vitae consectetur ex lorem in mi. In eu auctor lorem. Donec volutpat aliquet lorem vel interdum. Suspendisse erat metus, consequat eget volutpat vel, dictum eu augue. Nullam ullamcorper nunc neque, rhoncus rutrum lacus euismod quis. Pellentesque eget neque tempor, vulputate tellus a, euismod lacus. In ut ante dolor. Vivamus dictum et dui a molestie. Nam interdum euismod ipsum nec consequat. Vestibulum ornare magna sit amet leo venenatis posuere. Nullam mollis aliquam elementum. Praesent a sapien ipsum.'
 }]
 
-/**
- * Hello controller. Returns a salute!
- * @param  {Request} req
- * @param  {Response} res
- */
-export function getArticles(req, res, next) {
-  res.send(articles)
-  next()
-}
-
-export function getArticle(req, res, next) {
-  res.send(articles[req.params.id])
-  next()
+export {
+  articles
 }

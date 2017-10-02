@@ -1,4 +1,4 @@
-import * as ArticlesController from '../../api/controllers/articles'
+import * as ArticlesController from '../../api/rest/articles'
 
 /**
  * Hello controller router

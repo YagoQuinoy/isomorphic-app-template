@@ -21,6 +21,9 @@ const server = restify.createServer({
 
 errorHandler.handleUncaughtException(server)
 
+server.use(restify.plugins.bodyParser())
+server.use(restify.plugins.queryParser())
+
 // Logging
 server.use(restify.requestLogger())
 

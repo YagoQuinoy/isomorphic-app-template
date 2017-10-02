@@ -3,7 +3,8 @@ import path from 'path'
 import restify from 'restify'
 
 // Api
-import * as apiRoute from './api'
+import * as restRoute from './rest'
+import * as graphqlRoute from './graphql'
 
 // Server-Side Rendering
 import { render } from '../serverSideRendering'
@@ -13,7 +14,8 @@ import { render } from '../serverSideRendering'
  * @param  {Server} server
  */
 export function init(server) {
-  apiRoute.route(server)
+  restRoute.route(server)
+  graphqlRoute.route(server)
 
   const staticPath = path.resolve(`${__dirname}/../../../`)
   server.get(/\/public\/?.*/, restify.serveStatic({
