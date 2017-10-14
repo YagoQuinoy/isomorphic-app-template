@@ -5,7 +5,7 @@ import bformat from 'bunyan-format'
 
 import config from '../../config'
 import * as errorHandler from './errorHandler'
-import * as router from './router'
+import * as router from './routes'
 
 const formatOut = bformat({ outputMode: 'short' }, process.stdout)
 
