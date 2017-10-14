@@ -8,8 +8,6 @@ export default {
     audit: false
   },
   database: {
-    uri: 'mongodb://localhost/isomorphic-app',
-    user: '',
-    pass: ''
+    uri:  'mongodb://localhost/isomorphic-app'
   }
 }

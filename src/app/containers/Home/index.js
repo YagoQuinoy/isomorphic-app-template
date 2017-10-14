@@ -26,9 +26,9 @@ class Home extends Component {
   render() {
     const { articles } = this.props
 
-    const items = articles.map((article, index) => (
-      <section key={`_${index}`}>
-        <h5><Link to={`/articles/${index}`}>{article.title}</Link></h5>
+    const items = articles.map((article) => (
+      <section key={`_${article._id}`}>
+        <h5><Link to={`/articles/${article._id}`}>{article.title}</Link></h5>
         <p>{article.content}</p>
       </section>
     ))

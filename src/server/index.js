@@ -47,9 +47,11 @@ routes.init(server)
 
 // Database setup
 const { database } = config
-mongoose.connect(database.uri, {
-  user: database.user,
-  pass: database.pass
+const options = { useMongoClient: true }
+mongoose.connect(database.uri, options, (err) => {
+  if (err) {
+    logger.error(err)
+  }
 })
 
 // Start server

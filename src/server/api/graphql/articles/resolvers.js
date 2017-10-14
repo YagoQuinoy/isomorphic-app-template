@@ -1,14 +1,12 @@
-import { find } from 'lodash'
-
-import { articles } from '../../mocks.js'
+import Article from '../../models/article'
 
 const Query = {
-  articles: () => articles,
-  article: (_, { id }) => find(articles, { id: id })
+  articles: () => Article.find(),
+  article: (_, { id }) => Article.findOne({ _id: id })
 }
 
 const Mutation = {
-  editArticle: (_, { postId }) => {
+  editArticle: (_, { }) => {
     console.log('edited')
   }
 }

@@ -1,4 +1,4 @@
-const articles = [{
+export default [{
   title: ' Lorem ipsum dolor sit amet',
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean suscipit tortor non nulla molestie, eget molestie quam tincidunt. Nullam consequat luctus vehicula. Mauris quis nisl massa. Praesent vitae tellus dignissim, imperdiet magna quis, convallis turpis. Phasellus ultrices at tellus pulvinar pellentesque. Nam iaculis bibendum fermentum. Proin commodo mattis odio, vitae auctor sem ullamcorper nec. Praesent vel dui ac odio congue lacinia. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque feugiat magna eu eros elementum, non pharetra quam faucibus. Vivamus vitae viverra tortor, in tempus diam. Aenean sagittis lacus vel interdum vestibulum.'
 }, {
@@ -14,7 +14,3 @@ const articles = [{
   title:'Pellentesque vitae metus ac dui facilisis vestibulum',
   content: 'Pellentesque vitae metus ac dui facilisis vestibulum. Vivamus lacus lectus, vulputate finibus massa at, posuere elementum ipsum. Nullam facilisis nunc quis metus commodo, lobortis suscipit purus imperdiet. Phasellus fermentum, quam et suscipit malesuada, elit diam blandit dui, vitae consectetur ex lorem in mi. In eu auctor lorem. Donec volutpat aliquet lorem vel interdum. Suspendisse erat metus, consequat eget volutpat vel, dictum eu augue. Nullam ullamcorper nunc neque, rhoncus rutrum lacus euismod quis. Pellentesque eget neque tempor, vulputate tellus a, euismod lacus. In ut ante dolor. Vivamus dictum et dui a molestie. Nam interdum euismod ipsum nec consequat. Vestibulum ornare magna sit amet leo venenatis posuere. Nullam mollis aliquam elementum. Praesent a sapien ipsum.'
 }]
-
-export {
-  articles
-}

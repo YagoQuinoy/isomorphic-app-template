@@ -1,4 +1,4 @@
-import { articles } from '../../mocks.js'
+import Article from '../../models/article'
 
 /**
  * Hello controller. Returns a salute!
@@ -6,13 +6,19 @@ import { articles } from '../../mocks.js'
  * @param  {Response} res
  */
 function getArticles(req, res, next) {
-  res.send(articles)
-  next()
+  Article.find()
+    .then((articles) => {
+      res.send(articles)
+      next()
+    })
 }
 
 function getArticle(req, res, next) {
-  res.send(articles[req.params.id])
-  next()
+  Article.findOne({ _id: req.params.id })
+    .then((article) => {
+      res.send(article)
+      next()
+    })
 }
 
 export {
