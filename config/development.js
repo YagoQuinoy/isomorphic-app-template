@@ -6,5 +6,10 @@ export default {
   },
   logger: {
     audit: false
+  },
+  database: {
+    uri: 'mongodb://localhost/isomorphic-app',
+    user: '',
+    pass: ''
   }
 }

@@ -1,3 +1,11 @@
 export default {
-  env: 'production'
+  env: 'production',
+  logger: {
+    audit: true
+  },
+  database: {
+    uri: 'mongodb://localhost/isomorphic-app',
+    user: '',
+    pass: ''
+  }
 }
